@@ -1,0 +1,10 @@
+var express = require('express');
+var bodyParser = require('body-parser');
+var config = require('./Configuration');
+var memoryDb = require('./Dal/MemoryDataBase');
+var posts = require('./Routes/posts');
+var postsRouter = new posts(memoryDb);
+var app = express();
+app.use(bodyParser.json());
+app.use("/posts", postsRouter.router);
+app.listen(config.ExpressAppPort);
