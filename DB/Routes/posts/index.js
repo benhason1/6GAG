@@ -6,13 +6,25 @@ var PostsRouter = /** @class */ (function () {
         this._InitializeRouter();
     }
     PostsRouter.prototype._InitializeRouter = function () {
+        var _this = this;
         this.router.route('/:id')
             .get(function (req, res) {
-            res.send("returing from db /:id");
+            var id = req.params.id;
+            var DbResponse = _this.dataBaseWrapper.get(id);
+            if (DbResponse === null)
+                res.send("id not found");
+            else {
+                res.send(DbResponse);
+            }
         });
         this.router.route('/')
             .get(function (req, res) {
-            res.send("returing from db /");
+            var DbResponse = _this.dataBaseWrapper.getAll(50);
+            if (DbResponse === null)
+                res.send("no posts in db");
+            else {
+                res.send(DbResponse);
+            }
         });
     };
     return PostsRouter;
