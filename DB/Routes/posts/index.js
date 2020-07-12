@@ -1,4 +1,5 @@
 var routerExpress = require('express');
+var configuration = require('../../Configuration');
 var PostsRouter = /** @class */ (function () {
     function PostsRouter(dataBaseWrapper) {
         this.dataBaseWrapper = dataBaseWrapper;
@@ -19,7 +20,7 @@ var PostsRouter = /** @class */ (function () {
         });
         this.router.route('/')
             .get(function (req, res) {
-            var DbResponse = _this.dataBaseWrapper.getAll(50);
+            var DbResponse = _this.dataBaseWrapper.getAll(configuration.DefaultNumberOfPostsToSend);
             if (DbResponse === null)
                 res.send("no posts in db");
             else {

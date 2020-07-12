@@ -1,4 +1,5 @@
 const routerExpress = require('express')
+const configuration = require('../../Configuration')
 
 class PostsRouter {
     dataBaseWrapper: IDataBase
@@ -23,7 +24,7 @@ class PostsRouter {
         
         this.router.route('/')
             .get((req, res) => {
-                let DbResponse = this.dataBaseWrapper.getAll(50)
+                let DbResponse = this.dataBaseWrapper.getAll(configuration.DefaultNumberOfPostsToSend)
                 if (DbResponse === null)
                     res.send("no posts in db")
                 else {
