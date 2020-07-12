@@ -13,7 +13,6 @@ function Feed(props) {
             }
         </ul>
     )
-
 }
 
 export default Feed;
