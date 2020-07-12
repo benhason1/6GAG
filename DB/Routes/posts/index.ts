@@ -18,7 +18,7 @@ class PostsRouter {
             this.router.route('/')
             .get((req, res) => {
                 res.send("returing from db /")
-            })    
+            })
     }
 
 }
