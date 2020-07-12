@@ -10,7 +10,7 @@ class PostsRouter {
     }
     
     __InitializeRouter(){
-
+        
     }
 
     
