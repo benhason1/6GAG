@@ -12,12 +12,23 @@ class PostsRouter {
     _InitializeRouter() {
         this.router.route('/:id')
             .get((req, res) => {
-                res.send("returing from db /:id")
+                let id = req.params.id
+                let DbResponse = this.dataBaseWrapper.get(id)
+                if (DbResponse === null)
+                    res.send("id not found")
+                else {
+                    res.send(DbResponse)
+                }
             })
-
-            this.router.route('/')
+        
+        this.router.route('/')
             .get((req, res) => {
-                res.send("returing from db /")
+                let DbResponse = this.dataBaseWrapper.getAll(50)
+                if (DbResponse === null)
+                    res.send("no posts in db")
+                else {
+                    res.send(DbResponse)
+                }
             })
     }
 
