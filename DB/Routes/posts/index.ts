@@ -14,7 +14,7 @@ class PostsRouter {
         this.router.route('/:id')
             .get((req, res) => {
                 let id = req.params.id
-                let DbResponse = this.dataBaseWrapper.get(id)
+                let DbResponse = this.dataBaseWrapper.getByID(id)
                 if (DbResponse === null)
                     res.send("id not found")
                 else {
@@ -24,7 +24,7 @@ class PostsRouter {
         
         this.router.route('/')
             .get((req, res) => {
-                let DbResponse = this.dataBaseWrapper.getAll(configuration.DefaultNumberOfPostsToSend)
+                let DbResponse = this.dataBaseWrapper.getTop(configuration.DefaultNumberOfPostsToSend)
                 if (DbResponse === null)
                     res.send("no posts in db")
                 else {

@@ -11,7 +11,7 @@ var PostsRouter = /** @class */ (function () {
         this.router.route('/:id')
             .get(function (req, res) {
             var id = req.params.id;
-            var DbResponse = _this.dataBaseWrapper.get(id);
+            var DbResponse = _this.dataBaseWrapper.getByID(id);
             if (DbResponse === null)
                 res.send("id not found");
             else {
@@ -20,7 +20,7 @@ var PostsRouter = /** @class */ (function () {
         });
         this.router.route('/')
             .get(function (req, res) {
-            var DbResponse = _this.dataBaseWrapper.getAll(configuration.DefaultNumberOfPostsToSend);
+            var DbResponse = _this.dataBaseWrapper.getTop(configuration.DefaultNumberOfPostsToSend);
             if (DbResponse === null)
                 res.send("no posts in db");
             else {

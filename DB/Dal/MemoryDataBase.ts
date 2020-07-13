@@ -1,14 +1,46 @@
-class MemoryDataBase implements IDataBase{
+import uuid from 'uuid'
+import _ from 'lodash'
+
+class MemoryDataBase implements IDataBase {
+
+    memory: object[];
+    constructor() {
+        this.memory = []
+    }
+
     save(obj: Object) {
-        throw new Error("Method not implemented.");
-    }    getAll(size: Number): Object[] {
-        throw new Error("Method not implemented.");
+        obj["id"] = uuid.v4()
+        this.memory.push(obj)
     }
-    get(query: String): object {
-        throw new Error("Method not implemented.");
+
+    getTop(size: number): Object[] {
+        return this.memory.slice(0, size)
     }
-    update(id: String): Object {
-        throw new Error("Method not implemented.");
+
+    getByID(id: string): object {
+        let res = _.find(this.memory, { "id": id })
+
+        if (res == undefined)
+            return null;
+
+        return res;
+    }
+
+    getByQuery(matchItems: Object): Object[] {
+        return _.filter(this.memory, matchItems)
+    }
+
+    update(id: string, updatedItems:Object): Object {
+        let index = _.findIndex(this.memory, { "id": id })
+        if (index == -1)
+            return null
+        
+        for(let key of Object.keys(updatedItems)){
+            this.memory[index][key] = updatedItems[key]
+        }
+
+        return this.memory[index]
+        
     }
 
 

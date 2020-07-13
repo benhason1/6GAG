@@ -2,7 +2,8 @@ const uuid = require('uuid')
 
 interface IDataBase{
     save(obj: Object),
-    getAll(size:Number):Object[],
-    get(id:String):object,
-    update(id:String):Object
+    getTop(size:number):Object[],
+    getByID(id:string):object,
+    getByQuery(matchItems: Object):Object[],
+    update(id:string, updatedItems:Object):Object
 }
