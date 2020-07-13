@@ -14,7 +14,7 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
-        fetch(Config.serverIp)
+        fetch(`${Config.serverIp}/posts`)
             .then(res => res.json())
             .then(
                 (result) => {

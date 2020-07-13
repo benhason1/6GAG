@@ -3,12 +3,13 @@ import React from 'react';
 import './App.css';
 import Post from './HomePage/Feed/Post'
 import HomePage from './HomePage/HomePageView';
+import TopBar from './TopBar'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-
+      <TopBar></TopBar>
       <HomePage></HomePage>
       </header>
     </div>
