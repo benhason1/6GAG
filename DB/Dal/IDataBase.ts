@@ -1,5 +1,3 @@
-const uuid = require('uuid')
-
 interface IDataBase{
     save(obj: Object),
     getTop(size:number):Object[],

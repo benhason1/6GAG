@@ -1,11 +1,16 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const config = require('./Configuration')
+import * as express from "express";
 
-const memoryDb = require('./Dal/MemoryDataBase')
+import * as bodyParser from 'body-parser';
 
-const posts = require('./Routes/posts')
-const postsRouter = new posts(memoryDb)
+import config from './Configuration'
+
+
+import MemoryDB from './Dal/MemoryDataBase'
+    
+// const memoryDb = require('./Dal/MemoryDataBase')
+import posts from './Routes/posts'
+
+const postsRouter = new posts(MemoryDB)
 
 
 const app = express()

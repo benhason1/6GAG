@@ -2,7 +2,6 @@ import uuid from 'uuid'
 import _ from 'lodash'
 
 class MemoryDataBase implements IDataBase {
-
     memory: object[];
     constructor() {
         this.memory = []
@@ -46,6 +45,8 @@ class MemoryDataBase implements IDataBase {
 
 }
 
-const DB = new MemoryDataBase();
+const MemoryDB = new MemoryDataBase();
 
-module.exports = DB
+export default MemoryDB;
+
+

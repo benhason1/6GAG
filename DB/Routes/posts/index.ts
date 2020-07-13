@@ -1,12 +1,12 @@
-const routerExpress = require('express')
-const configuration = require('../../Configuration')
+import * as express from "express";
+import config from "../../Configuration"
 
 class PostsRouter {
     dataBaseWrapper: IDataBase
     router: any;
     constructor(dataBaseWrapper: IDataBase) {
         this.dataBaseWrapper = dataBaseWrapper
-        this.router = routerExpress.Router();
+        this.router = express.Router();
         this._InitializeRouter();
     }
 
@@ -24,16 +24,10 @@ class PostsRouter {
         
         this.router.route('/')
             .get((req, res) => {
-                let DbResponse = this.dataBaseWrapper.getTop(configuration.DefaultNumberOfPostsToSend)
-                if (DbResponse === null)
-                    res.send("no posts in db")
-                else {
-                    res.send(DbResponse)
-                }
+                res.send(this.dataBaseWrapper.getTop(config.DefaultNumberOfPostsToSend))
             })
     }
 
 }
 
-
-module.exports = PostsRouter
+export default PostsRouter;

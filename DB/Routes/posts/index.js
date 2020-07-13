@@ -1,9 +1,11 @@
-var routerExpress = require('express');
-var configuration = require('../../Configuration');
+"use strict";
+exports.__esModule = true;
+var express = require("express");
+var Configuration_1 = require("../../Configuration");
 var PostsRouter = /** @class */ (function () {
     function PostsRouter(dataBaseWrapper) {
         this.dataBaseWrapper = dataBaseWrapper;
-        this.router = routerExpress.Router();
+        this.router = express.Router();
         this._InitializeRouter();
     }
     PostsRouter.prototype._InitializeRouter = function () {
@@ -20,14 +22,9 @@ var PostsRouter = /** @class */ (function () {
         });
         this.router.route('/')
             .get(function (req, res) {
-            var DbResponse = _this.dataBaseWrapper.getTop(configuration.DefaultNumberOfPostsToSend);
-            if (DbResponse === null)
-                res.send("no posts in db");
-            else {
-                res.send(DbResponse);
-            }
+            res.send(_this.dataBaseWrapper.getTop(Configuration_1["default"].DefaultNumberOfPostsToSend));
         });
     };
     return PostsRouter;
 }());
-module.exports = PostsRouter;
+exports["default"] = PostsRouter;

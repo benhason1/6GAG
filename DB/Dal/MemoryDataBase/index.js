@@ -20,7 +20,7 @@ var MemoryDataBase = /** @class */ (function () {
         return res;
     };
     MemoryDataBase.prototype.getByQuery = function (matchItems) {
-        throw new Error("Method not implemented.");
+        return lodash_1["default"].filter(this.memory, matchItems);
     };
     MemoryDataBase.prototype.update = function (id, updatedItems) {
         var index = lodash_1["default"].findIndex(this.memory, { "id": id });
@@ -34,5 +34,5 @@ var MemoryDataBase = /** @class */ (function () {
     };
     return MemoryDataBase;
 }());
-var DB = new MemoryDataBase();
-module.exports = DB;
+var MemoryDB = new MemoryDataBase();
+exports["default"] = MemoryDB;
