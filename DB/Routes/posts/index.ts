@@ -6,7 +6,7 @@ class PostsRouter {
     router: any;
     constructor(dataBaseWrapper: IDataBase) {
         this.dataBaseWrapper = dataBaseWrapper
-        this.router = express.Router();
+        this.router = express.Router(); 
         this._InitializeRouter();
     }
 

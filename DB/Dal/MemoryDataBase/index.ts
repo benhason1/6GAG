@@ -1,5 +1,5 @@
-import uuid from 'uuid'
-import _ from 'lodash'
+import * as uuid from 'uuid'
+import * as _ from 'lodash'
 
 class MemoryDataBase implements IDataBase {
     memory: object[];
