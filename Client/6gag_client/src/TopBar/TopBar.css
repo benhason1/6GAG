@@ -1,6 +1,13 @@
 /* #upload-button{
 } */
+.top-bar{
+    position: fixed;
+}
+
 #upload-button{
+    top: 14px;
+    right: 16px;
+    position: absolute;
     /* background-color: '#2E3B55' */
     background-color: #0099ff;
     border-radius: 5px;
