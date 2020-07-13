@@ -15,14 +15,18 @@ var PostsRouter = /** @class */ (function () {
             var id = req.params.id;
             var DbResponse = _this.dataBaseWrapper.getByID(id);
             if (DbResponse === null)
-                res.send("id not found");
-            else {
-                res.send(DbResponse);
-            }
+                res.status(422);
+            res.send(DbResponse);
+        })
+            .put(function (req, res) {
+            res.send(_this.dataBaseWrapper.update(req.params.id, req.body));
         });
         this.router.route('/')
             .get(function (req, res) {
             res.send(_this.dataBaseWrapper.getTop(Configuration_1["default"].DefaultNumberOfPostsToSend));
+        })
+            .post(function (req, res) {
+            res.send(_this.dataBaseWrapper.save(req.body));
         });
     };
     return PostsRouter;

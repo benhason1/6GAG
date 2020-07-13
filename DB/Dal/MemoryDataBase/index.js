@@ -9,6 +9,7 @@ var MemoryDataBase = /** @class */ (function () {
     MemoryDataBase.prototype.save = function (obj) {
         obj["id"] = uuid.v4();
         this.memory.push(obj);
+        return obj;
     };
     MemoryDataBase.prototype.getTop = function (size) {
         return this.memory.slice(0, size);

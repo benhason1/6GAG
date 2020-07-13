@@ -12,21 +12,29 @@ class PostsRouter {
 
     _InitializeRouter() {
         this.router.route('/:id')
-            .get((req, res) => {
+            .get((req, res) => {                
                 let id = req.params.id
                 let DbResponse = this.dataBaseWrapper.getByID(id)
                 if (DbResponse === null)
-                    res.send("id not found")
-                else {
-                    res.send(DbResponse)
-                }
+                    res.status(422)
+
+                res.send(DbResponse)
             })
+            .put((req,res)=>{
+                res.send(this.dataBaseWrapper.update(req.params.id,req.body))
+            })
+            
         
         this.router.route('/')
             .get((req, res) => {
                 res.send(this.dataBaseWrapper.getTop(config.DefaultNumberOfPostsToSend))
             })
+            .post((req,res)=>{
+                res.send(this.dataBaseWrapper.save(req.body))
+            })
     }
+
+
 
 }
 

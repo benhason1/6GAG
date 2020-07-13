@@ -10,6 +10,7 @@ class MemoryDataBase implements IDataBase {
     save(obj: Object) {
         obj["id"] = uuid.v4()
         this.memory.push(obj)
+        return obj;
     }
 
     getTop(size: number): Object[] {
