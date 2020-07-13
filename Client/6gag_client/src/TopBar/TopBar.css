@@ -1,0 +1,13 @@
+/* #upload-button{
+} */
+#upload-button{
+    /* background-color: '#2E3B55' */
+    background-color: #0099ff;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+#upload-button:hover{
+    background-color: #47b5ff
+}

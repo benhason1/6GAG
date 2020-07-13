@@ -1,5 +1,5 @@
 const config = {
-    serverIp : "http://127.0.0.1:7000/users"
+    serverIp : "http://127.0.0.1:8000"
 }
 
 module.exports = config
