@@ -1,8 +1,14 @@
 import * as multer from 'multer'
+const fs = require('fs')
+import config from '../Configuration'
+
+if(!fs.existsSync(config.filesPath)){
+    fs.mkdirSync(config.filesPath)
+}
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, "./uploads");
+      cb(null, config.filesPath);
     },
     filename: (req, file, cb) => {
       let filePath = Date.now() + '_' + file.originalname
