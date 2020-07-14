@@ -17,11 +17,11 @@ router.route('/:id')
 
 router.route('/')
     .get((req, res) => {
-        axios.get(`${DBIp}/posts`, req)
+        axios.get(`${config.DBIp}/posts`, req)
             .then((dbRes) => res.send(dbRes))
     })
     .post((req, res) => {
-        axios.post(`${DBIp}/posts`, req)
+        axios.post(`${config.DBIp}/posts`, req)
             .then((dbRes) => res.send(dbRes))
     })
 
