@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
+import './post.css'
 
 function Post(props) {
     return <div className="Post">
