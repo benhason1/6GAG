@@ -7,6 +7,8 @@ const upload = require('./MulterInitializer')
 
 const app = express()
 
+
+const filesRouter = require('./routes/files')
 const postsRouter = new posts(upload)
 
 var corsOptions = {
@@ -19,9 +21,8 @@ app.use(cors(corsOptions))
 app.use(bodyParser.json())
 
 app.use("/posts",postsRouter.router);
+app.use("/files",filesRouter)
 
-app.get('/',(req,res)=>{
-    res.send("hello")
-})
+
 
 app.listen(config.ExpressAppPort)
