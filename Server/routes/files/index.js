@@ -1,24 +1,23 @@
 const express = require('express')
 const config = require('../../Configuration')
 const axios = require('axios')
-
+const request = require('request')
 const router = express.Router();
 
 
 router.route('/')
 .get((req,res)=>{
-    axios.get(`${config.DBIp}/files/?path=${req.query.path}`)
-    .then((dbRes)=>{
-        res.set('Content-Type', dbRes.headers["content-type"])
-        res.send(dbRes.data)
-        // res.writeHead(200, {'Content-Type': dbRes.headers["content-type"]});
-        // res.end(dbRes.data)
+    request(`${config.DBIp}${req.originalUrl}`).pipe(res)
 
-    })
-    .catch((err)=>{
-        res.status(err.response.status)
-        res.send(err.message)
-    })
+    // axios.get(`${config.DBIp}/files/?path=${req.query.path}`)
+    // .then((dbRes)=>{
+        
+
+    // })
+    // .catch((err)=>{
+    //     res.status(err.response.status)
+    //     res.send(err.message)
+    // })
 })
 
 module.exports = router;

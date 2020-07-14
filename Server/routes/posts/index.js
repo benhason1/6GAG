@@ -2,6 +2,7 @@ const express = require('express')
 const axios = require('axios')
 const config = require('../../Configuration')
 const FormData = require('form-data')
+const request = require('request')
 
 
 class PostsRouter {
@@ -35,14 +36,13 @@ class PostsRouter {
             })
 
             .post(this.multerUpload.single('postImage'), (req, res) => {
-
+                                
                 const form = this._reqToFormData(req)
 
                 axios.post(`${config.DBIp}/posts`, form, {
                     headers: form.getHeaders()
                 })
                     .then((dbRes) => {
-                        console.log(dbRes)
                         res.send(dbRes.data)
                     }
                     )
