@@ -9,15 +9,6 @@ router.route('/')
 .get((req,res)=>{
     request(`${config.DBIp}${req.originalUrl}`).pipe(res)
 
-    // axios.get(`${config.DBIp}/files/?path=${req.query.path}`)
-    // .then((dbRes)=>{
-        
-
-    // })
-    // .catch((err)=>{
-    //     res.status(err.response.status)
-    //     res.send(err.message)
-    // })
 })
 
 module.exports = router;
