@@ -5,7 +5,6 @@ import TextField from '@material-ui/core/TextField'
 import StepButton from '@material-ui/core/StepButton'
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import "./upload.css"
 
 class Upload extends Component {
@@ -13,7 +12,6 @@ class Upload extends Component {
         postImage: null,
         title: "",
         altText: "",
-
     }
 
     constructor(props) {
@@ -27,7 +25,7 @@ class Upload extends Component {
     }
 
     onFileChange = event => {
-        this.setState({ postImage: event.target.files[0] });
+        this.setState({ postImage: event.target.files[0]});
     };
 
     onTitleChange = event => {
@@ -45,6 +43,12 @@ class Upload extends Component {
             formData.append(key, this.state[key])
         }
 
+        for(let key of Object.keys(Config.postInitData)){
+            formData.append(key, Config.postInitData[key])
+        }
+
+
+
         axios.post(`${Config.serverPostsRoute}`, formData)
             // .then(_ => { this.state.isSuccedded = true })
             .then(_=>toast.success("upload succeeded!",{position:toast.POSITION.BOTTOM_RIGHT}))
@@ -52,20 +56,6 @@ class Upload extends Component {
         //clean form and state
         event.target.reset();
         this.initState()
-    };
-
-
-    fileData = () => {
-        if (this.state.postImage) {
-
-            return (
-                <div className="fileData">
-                    <div>File Details:</div>                    
-                    <p>File Name:{this.state.postImage.name}</p>
-                    <p>{`Last Modified: ${this.state.postImage.lastModifiedDate.toDateString()}`}></p>
-                </div>
-            );
-        }
     };
 
     render() {
@@ -82,7 +72,6 @@ class Upload extends Component {
                     </div>
 
                     <div>
-
                         <input type="file" accept=".jpg, .jpeg, .png" onChange={this.onFileChange} required/>
                         <StepButton type="submit">
                             Submit!

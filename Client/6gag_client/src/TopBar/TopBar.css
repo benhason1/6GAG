@@ -2,14 +2,13 @@
 } */
 .top-bar{
     position: relative;
-    padding: 16px;
+    padding: 30px;
 }
 
 #upload-button{
-    top: 14px;
+    top: 7px;
     right: 16px;
-    position: absolute;
-    /* background-color: '#2E3B55' */
+    position: fixed;
     background-color: #0099ff;
     border-radius: 5px;
     color: white;
@@ -18,4 +17,14 @@
 
 #upload-button:hover{
     background-color: #47b5ff
+}
+
+#six-gag-logo{
+    align-content: center;
+    position: relative;
+    font-style: italic;
+    color: #0099ff;
+    background-color: inherit;
+
+    /* background-image: url('/6gag-logo.png'); */
 }

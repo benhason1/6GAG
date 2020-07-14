@@ -6,7 +6,7 @@ function Feed(props) {
     return (
         <div>
             {items.map(item => {
-                return <Post title={item.title} postImage={item.postImage} id={item.id} altText={item.altText}></Post>
+                return <Post title={item.title} postImage={item.postImage} id={item.id} altText={item.altText} likes={item.likes} dislikes={item.dislikes} comments={item.comments}></Post>
             })
             }
         </div>
