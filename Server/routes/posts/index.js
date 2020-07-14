@@ -35,13 +35,9 @@ class PostsRouter{
         })
     
         .post(this.multerUpload.single('postImage'), (req, res) => {
-    
-            const form = new FormData();
-            const { file } = req;
-            const { buffer, originalname: filename } = file;
-    
-            form.append('postImage', buffer, { filename })
-    
+            
+            const form = this._reqToFormData(req)
+
             axios.post(`${config.DBIp}/posts`, form, {
                 headers: form.getHeaders()
             })
@@ -55,6 +51,19 @@ class PostsRouter{
                     res.send(err)
                 })
         })
+    }
+
+    _reqToFormData(req){
+        const form = new FormData();
+        const { file } = req;
+        const { buffer, originalname: filename } = file;
+        
+        for(let key of Object.keys(req.body)){
+            form.append(key,req.body[key])
+        }
+
+        form.append('postImage', buffer, { filename })
+        return form
     }
 }
 
