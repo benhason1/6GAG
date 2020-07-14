@@ -7,7 +7,7 @@ function Feed(props) {
         <ul>
             {items.map(item => (
                 // need to change it to recive the file content from server
-                <Post title={item.title} toolTip="working" imageSource={require("C:\\ben\\MMS\\finalExercise\\6GAG\\Client\\6gag_client\\src\\PostImages\\Random.PNG")}></Post>
+                <Post postId={item.id} title={item.title} toolTip={item.altText} imageSource={require("C:\\ben\\MMS\\finalExercise\\6GAG\\Client\\6gag_client\\src\\PostImages\\Random.PNG")}></Post>
             ))
             }
         </ul>
