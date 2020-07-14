@@ -7,7 +7,7 @@ class PostsRouter {
     dataBaseWrapper: IDataBase
     router: any;
     multerUpload: any;
-    constructor(dataBaseWrapper: IDataBase,multerUpload) {
+    constructor(dataBaseWrapper: IDataBase, multerUpload) {
         this.dataBaseWrapper = dataBaseWrapper
         this.router = express.Router();
         this.multerUpload = multerUpload;

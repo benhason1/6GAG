@@ -12,6 +12,8 @@ import MemoryDB from './Dal/MemoryDataBase'
 // const memoryDb = require('./Dal/MemoryDataBase')
 import posts from './Routes/posts'
 
+import filesRouter from './Routes/files'
+
 
 //multer initialize
 const storage = multer.diskStorage({
@@ -49,7 +51,7 @@ const app = express()
 app.use(bodyParser.json())
 
 app.use("/posts",postsRouter.router)
-
+app.use("/files",filesRouter)
 
 
 app.listen(config.ExpressAppPort)
