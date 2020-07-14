@@ -38,6 +38,10 @@ var PostsRouter = /** @class */ (function () {
             res.send(_this.dataBaseWrapper.getTop(Configuration_1["default"].DefaultNumberOfPostsToSend));
         })
             .post(this.multerUpload.single('postImage'), function (req, res) {
+            if (!req.file) {
+                res.status(500);
+                return res.send("didnt sent file");
+            }
             res.send(_this.dataBaseWrapper.save(__assign(__assign({}, req.body), { "postImage": req.file.path })));
         });
     };

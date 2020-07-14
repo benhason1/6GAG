@@ -34,8 +34,11 @@ class PostsRouter {
                 res.send(this.dataBaseWrapper.getTop(config.DefaultNumberOfPostsToSend))
             })
             .post(this.multerUpload.single('postImage'),(req, res) => {                
+                if(!req.file){
+                    res.status(500)
+                    return res.send("didnt sent file")
+                }
                 res.send(this.dataBaseWrapper.save({...req.body,"postImage":req.file.path}));
-
             })
     }
 
