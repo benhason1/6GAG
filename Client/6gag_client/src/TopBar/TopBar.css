@@ -1,7 +1,8 @@
 /* #upload-button{
 } */
 .top-bar{
-    position: fixed;
+    position: relative;
+    padding: 16px;
 }
 
 #upload-button{

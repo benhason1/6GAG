@@ -4,13 +4,12 @@ import Post from './Post'
 function Feed(props) {
     const { items } = props
     return (
-        <ul>
+        <div>
             {items.map(item => {
-                return (<Post title={item.title} postImage={item.postImage} id={item.id} altText={item.altText}></Post>)
+                return <Post title={item.title} postImage={item.postImage} id={item.id} altText={item.altText}></Post>
             })
             }
-            )
-        </ul>
+        </div>
     )
 }
 

@@ -1,3 +1,19 @@
 h3{
     color: black;
 }
+
+.post{
+    color: black;
+}
+
+.post-image-container{
+    color: black;
+}
+.loading-message{
+    color: black;
+}
+
+.post-image{
+    width: 700px;
+    height: 400px;
+}
