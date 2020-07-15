@@ -1,3 +1,4 @@
+
 .heart-btn{
     position: absolute;
     top: 50%;
@@ -11,7 +12,10 @@
     border-radius: 5px;
     cursor: pointer;
   }
-
+  .content.heart-active{
+    border-color: #f9b9c4;
+    background: #fbd0d8;
+  }
   .heart{
     position: absolute;
     background: url("/img.png") no-repeat;
@@ -29,38 +33,24 @@
     color: grey;
     font-family: 'Montserrat',sans-serif;
   }
-
-.heart-btn.active >.content >.text{
-  color: #000;
-
-}
-
-.heart-btn.active>.content{
-  border-color: #f9b9c4;
-  background: #fbd0d8;
-}
-
-
-.heart-btn.active >.content >.heart{
-  background-position: right;
-}
-
-.heart-btn.active >.content >.heart
-{
-  animation: animate .8s steps(28) 1;
-  background-position: left;
-  animation-fill-mode: forwards;
-}
-@keyframes animate {
-  0%{
-    background-position: left;
+  .numb:before{
+    font-size: 21px;
+    margin-left: 7px;
+    font-weight: 600;
+    color: #9C9496;
+    font-family: sans-serif;
   }
-  100%{
+  .numb.heart-active:before{
+    color: #000;
+  }
+  .text.heart-active{
+    color: #000;
+  }
+
+  .heart.heart-already-active{
     background-position: right;
-  }
-  
-}
 
+  }
   .heart.heart-active{
     animation: animate .8s steps(28) 1;
     background-position: left;

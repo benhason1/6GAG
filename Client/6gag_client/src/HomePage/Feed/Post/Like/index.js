@@ -9,7 +9,7 @@ export default class LikeButton extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isFirst :true,
+            isFirst: true,
             isActive: this.props.isLiked,
             likesNumber : this.props.likes
         }
@@ -36,20 +36,23 @@ export default class LikeButton extends Component {
 
     render() {
         const { isActive,likesNumber,isFirst } = this.state
-
-        var classes = classNames(
+        
+        //if first render of page doesnt show like animation
+        let heartClassNames =classNames(
             {
-                'heart-active':!isFirst,
-                'heart-already-active': isFirst
+                "heart heart-already-active":isActive&&isFirst,
+                "heart heart-active":isActive && !isFirst,
+                "heart":!isActive
             }
         )
 
         return <div>
-            <span id="likes">{likesNumber} likes </span>
-            <div className={isActive?"heart-btn active":"heart-btn"} onClick={this.handleClicked}>
-                <div className="content">
-                    <span className="heart"></span>
-                    <span className="text">Like</span>
+            <span id="likes">{likesNumber} likes: </span>
+            <div className="heart-btn" onClick={this.handleClicked}>
+                <div className={isActive ? "content heart-active" : "content"}>
+                    <span className={heartClassNames}></span>
+                    <span className={isActive ? "text heart-active" : "text"}>Like</span>
+                    <span className={isActive ? "numb heart-active" : "numb"}></span>
                 </div>
             </div>
         </div>
