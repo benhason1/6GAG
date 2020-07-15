@@ -1,53 +1,28 @@
 import React from 'react'
-import { Component } from 'react'
-import StepButton from '@material-ui/core'
-import axios from 'axios'
-import Config from '../../../../Configuration'
+import CommentForm from './CommentForm'
+import './commentSection.css'
+import { Paper, AppBar } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography'
+import { black } from 'color-name'
 
-export default class Comment extends Component {
 
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            currentComment: "",
-            comments: this.props.comments
-        }
-    }
+function CommentSection(props) {
+    const { comments } = props
 
-    handleClicked = (event) => {
-        event.preventDefault();
-        
-        const { id } = this.props
-        let { currentComment } = this.state
+    return <div className="comment-section">
+        <Typography variant="h5" component="h3">
+            Comments Section:
+            </Typography>
 
-        axios.put(`${Config.serverPostsRoute}/${id}`, { "Action": "comment", "payload": { "content": currentComment } })
-            .then(() => console.log("updated comment"))
-            .catch((err) => console.log(err))
 
-        this.setState({ comments: [...this.state.comments, currentComment], currentComment: "" })
-        event.target.reset();
-    }
+        {comments.map(item => {
+            return <div className="comment-content">{item}</div>
+        })}
 
-    onCommentInputChange = event => {
-        this.setState({ currentComment: event.target.value })
-    }
+    </div>
 
-    render() {
-        const { comments } = this.state
-
-        return <div>
-            {comments.map(item => {
-                return <div>{item}</div>
-            })}
-
-            <form onSubmit={this.handleClicked}>
-                <input type="text" placeholder="enterComment" onChange={this.onCommentInputChange}></input>
-                <button type="submit">
-                    Post!
-                </button>
-            </form>
-        </div>
-
-    }
 }
+
+
+export default CommentSection;

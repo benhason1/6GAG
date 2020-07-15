@@ -1,36 +1,63 @@
 import React from 'react'
+import { Component } from 'react'
+import Popup from '../../../utils/Popup'
+import { AppBar, Toolbar, Button } from '@material-ui/core'
+
 import ReactTooltip from 'react-tooltip'
 import './post.css'
 import '../../../utils/ErrorStyle/error.css'
 import Image from '../../../utils/Image'
-import { IconButton } from '@material-ui/core'
+import { IconButton, Paper } from '@material-ui/core'
 import LikeButton from './Like'
 import CommentSection from './CommentSection'
+import CommentForm from './CommentSection/CommentForm'
+import UploadPostForm from '../../../UploadPostForm'
 
-function Post(props) {
-    const { title, postImage, id, altText, likes, isLiked,comments } = props
+export default class Post extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showUploadPopup: false
+        }
+    }
 
-    // let commentNumber = 0;
-    // if (comments instanceof(Array))
-    // {
-    //     commentNumber = comments.length
-    // }   
 
+    onUploadButtonSubmit() {
+        this.setState({
+            showUploadPopup: !this.state.showUploadPopup
+        })
+    }
 
-    return <div className="post">
-        <h3>{title}</h3>
+    render() {
+        const { title, postImage, id, altText, likes, isLiked, comments } = this.props
 
-        <ReactTooltip id={id}>{altText}</ReactTooltip>
-        <div className="post-image-container" data-tip data-for={id}>
-            <Image filePath={postImage} alt="post img" className="post-image"></Image>
+        return <div className="post">
+            <h3>{title}</h3>
+
+            <ReactTooltip id={id}>{altText}</ReactTooltip>
+            <div className="post-image-container" data-tip data-for={id} onClick={this.onUploadButtonSubmit.bind(this)}>
+                <Image filePath={postImage} alt="post img" className="post-image" ></Image>
+            </div>
+
+            <div className="post-data">
+                <span className="like-input">
+                    <LikeButton id={id} likes={Number(likes)} isLiked={Boolean(isLiked)}></LikeButton>
+                </span>
+                <span className="comment-input">
+                    <CommentForm id={id}></CommentForm>
+
+                </span >
+                <div className="post-popup">
+                    <AppBar>
+                        {this.state.showUploadPopup && <Popup closePopup={this.onUploadButtonSubmit.bind(this)} text={<div><CommentSection id={id} comments={comments instanceof (Array) ? comments : []}></CommentSection>
+                            <div className="popup-comment-form">
+                                <CommentForm id={id} ></CommentForm>
+                            </div></div>}>
+                        </Popup>}
+                    </AppBar>
+                </div>
+            </div>
         </div>
-
-        <div className="post-data">
-            <LikeButton id={id}  likes={Number(likes)} isLiked={Boolean(isLiked)}></LikeButton>
-
-            <CommentSection id={id} comments={comments instanceof(Array)?comments:[]}></CommentSection>
-        </div>
-    </div>
+    }
 }
 
-export default Post;

@@ -1,0 +1,22 @@
+.comment-section{
+    position: relative;
+    text-align: left;
+    margin-left: 0.5%;
+    overflow: auto;
+    height: inherit;
+}
+.comment-content
+{
+    color: black;
+    position: relative;
+    font-size: 20px;
+}
+.random-random{
+    position: relative;
+    padding: 30px;
+}
+
+.popup-comment-form{
+    position:relative;
+    top: 100%;
+}
