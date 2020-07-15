@@ -5,7 +5,8 @@ const FormData = require('form-data')
 const request = require('request')
 
 class PostsRouter {
-    constructor(multerUpload) {
+    constructor(multerUpload,nameToAction) {
+        this.nameToAction = nameToAction
         this.multerUpload = multerUpload
         this.router = express.Router()
         this._InitializeRouter();
@@ -26,46 +27,29 @@ class PostsRouter {
 
                 let action = req.body["Action"]
 
-                if (action === 'like') {
+                if(!this.nameToAction[action])
+                    return res.send("action doesnt exist")
 
-                    let updatedData = {}
-                    axios.get(`${config.DBIp}/posts/${req.params.id}`)
-                        .then((dbRes) => {
-                            let dbResData = dbRes.data;
-                            if (!dbResData["PeopleLiked"]) {
-                                updatedData = { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked': [req.ip] }
-
-                            }
-
-                            else if (dbResData["PeopleLiked"].includes(req.ip)) {
-                                updatedData = { 'likes': Number(dbResData['likes']) - 1, 'PeopleLiked': dbResData['PeopleLiked'].filter(item => item !== req.ip) }
-                            }
-
-                            else {
-                                dbResData['PeopleLiked'].push(req.ip);
-                                updatedData = { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked': dbResData['PeopleLiked'] }
-                            }
-
-                            axios.put(`${config.DBIp}/posts/${req.params.id}`, updatedData)
-                                .then((updateDbRes) => res.send(updateDbRes))
-                                .catch((updateDbErr) => res.send(updateDbErr))
-                        })
+                else{
+                    return this.nameToAction[action](req,res)
                 }
 
             })
 
-
+        
         this.router.route('/')
             .get((req, res) => {
                 axios.get(`${config.DBIp}/posts`, req)
                     .then((dbRes) => {
-                        dbRes.data.forEach(element => {
-                            if (!element["PeopleLiked"])
-                                element['isLiked'] = false
-                            else if (element["PeopleLiked"].includes(req.ip)) 
-                                element['isLiked'] = true
+                        
+                        dbRes.data.forEach(post => {
+
+                            if (!post["PeopleLiked"])
+                                post['isLiked'] = false
+                            else if (post["PeopleLiked"].includes(req.ip)) 
+                                post['isLiked'] = true
                             else
-                                element['isLiked'] = false
+                                post['isLiked'] = false
 
                             });
 

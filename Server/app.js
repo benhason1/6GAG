@@ -4,12 +4,15 @@ const posts = require('./routes/posts')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const upload = require('./MulterInitializer')
-
+const likeAction = require('./actions/like')
 const app = express()
 
 
 const filesRouter = require('./routes/files')
-const postsRouter = new posts(upload)
+
+nameToAction = {'like':likeAction}
+
+const postsRouter = new posts(upload,nameToAction)
 
 var corsOptions = {
     origin: '*',
