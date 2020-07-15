@@ -12,9 +12,6 @@ export default class LikeButton extends Component {
         }
     }
 
-
-    
-
     handleClicked= ()=>{
         // this.props.onClick();
         let {likesNumber, id} = this.props
@@ -22,18 +19,17 @@ export default class LikeButton extends Component {
 
         //if the likes button is already active
         if(isActive){
-            likesNumber-=1;
+            likesNumber -=1;
         }
         else{
-            likesNumber+=1
+            likesNumber +=1
         }
 
-        axios.put(`${Config.serverPostsRoute}/${id}`,{"likes":likesNumber})
+        axios.put(`${Config.serverPostsRoute}/${id}`,{"Action":"like"})
         .then(()=>console.log("updated"))
         .catch((err)=>console.log(err))
 
         this.setState({isActive:!isActive})
-
     }
 
     render() {

@@ -9,6 +9,8 @@ import LikeButton from './LikeButton'
 function Post(props) {
 
     const { title, postImage, id, altText, likes, comments } = props
+
+
     let commentNumber = 0;
     if (typeof (comments) === Array)
         commentNumber = comments.length
@@ -23,7 +25,7 @@ function Post(props) {
         </div>
 
         <div className="post-data">
-            <LikeButton id={id}  likesNumber={likes}></LikeButton>
+            <LikeButton id={id}  likesNumber={Number(likes)}></LikeButton>
 
             <span id="likes">{likes} likes</span>
             <span>
