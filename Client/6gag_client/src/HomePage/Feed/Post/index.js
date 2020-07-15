@@ -4,7 +4,7 @@ import './post.css'
 import '../../../utils/ErrorStyle/error.css'
 import Image from '../../../utils/Image'
 import { IconButton } from '@material-ui/core'
-import LikeButton from './LikeButton'
+import LikeButton from './Like'
 
 
 

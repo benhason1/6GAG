@@ -36,7 +36,7 @@ export default class LikeButton extends Component {
         const { isActive,likesNumber } = this.state
 
         return <div>
-            <span id="likes">{likesNumber} likes: </span>
+            <span id="likes">{likesNumber} likes </span>
             <div className="heart-btn" onClick={this.handleClicked}>
                 <div className={isActive ? "content heart-active" : "content"}>
                     <span className={isActive ? "heart heart-active" : "heart"}></span>

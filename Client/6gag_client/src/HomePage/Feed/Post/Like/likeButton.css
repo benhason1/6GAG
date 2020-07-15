@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap');
-
 .heart-btn{
     position: absolute;
     top: 50%;
@@ -47,6 +45,11 @@
   .text.heart-active{
     color: #000;
   }
+
+/* .heart.heart-already-active{
+  background-position: right;
+} */
+
   .heart.heart-active{
     animation: animate .8s steps(28) 1;
     background-position: left;

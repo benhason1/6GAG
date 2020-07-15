@@ -4,23 +4,23 @@ h3{
 
 .post{
     position: relative;
-    width: 50%;
+    width: 40%;
     height: 50%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
-    border-radius: 30px;
-    border-color: lightblue;
-    border-style: solid;
+    border-radius: 20px;
+    border-bottom: 5px solid lightblue;
+    background-color: #fff;
     margin-left: auto;
     margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .post-image-container{
     margin-left: 40%;
-
     width: 25%;
     height: 25%;
     color: black;
