@@ -28,7 +28,7 @@ function Post(props) {
         <div className="post-data">
             <LikeButton id={id}  likes={Number(likes)} isLiked={Boolean(isLiked)}></LikeButton>
 
-            <CommentSection comments={comments instanceof(Array)?comments:[]}></CommentSection>
+            <CommentSection id={id} comments={comments instanceof(Array)?comments:[]}></CommentSection>
         </div>
     </div>
 }

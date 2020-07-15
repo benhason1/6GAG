@@ -24,6 +24,7 @@ axios.get(`${config.DBIp}/posts/${req.params.id}`)
             .then((updateDbRes) => res.send(updateDbRes))
             .catch((updateDbErr) => res.send(updateDbErr))
     })
+    .catch((dbRes) => res.send(dbRes))
 }
 
 module.exports = likeAction

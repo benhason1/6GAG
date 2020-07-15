@@ -4,13 +4,14 @@ const posts = require('./routes/posts')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const upload = require('./MulterInitializer')
-const likeAction = require('./actions/like')
 const app = express()
-
 
 const filesRouter = require('./routes/files')
 
-nameToAction = {'like':likeAction}
+const likeAction = require('./actions/like')
+const commentAction = require('./actions/comment')
+
+nameToAction = {'like':likeAction,'comment':commentAction}
 
 const postsRouter = new posts(upload,nameToAction)
 
