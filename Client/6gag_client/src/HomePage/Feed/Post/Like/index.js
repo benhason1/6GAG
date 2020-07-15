@@ -3,11 +3,13 @@ import { Component } from 'react'
 import './likeButton.css'
 import Config from '../../../../Configuration'
 import axios from 'axios'
+import classNames from 'classnames'
 
 export default class LikeButton extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isFirst :true,
             isActive: this.props.isLiked,
             likesNumber : this.props.likes
         }
@@ -29,19 +31,25 @@ export default class LikeButton extends Component {
             .then(() => console.log("updated"))
             .catch((err) => console.log(err))
 
-        this.setState({ isActive: !isActive,likesNumber:likesNumber })
+        this.setState({ isActive: !isActive,likesNumber:likesNumber,isFirst:false })
     }
 
     render() {
-        const { isActive,likesNumber } = this.state
+        const { isActive,likesNumber,isFirst } = this.state
+
+        var classes = classNames(
+            {
+                'heart-active':!isFirst,
+                'heart-already-active': isFirst
+            }
+        )
 
         return <div>
             <span id="likes">{likesNumber} likes </span>
-            <div className="heart-btn" onClick={this.handleClicked}>
-                <div className={isActive ? "content heart-active" : "content"}>
-                    <span className={isActive ? "heart heart-active" : "heart"}></span>
-                    <span className={isActive ? "text heart-active" : "text"}>Like</span>
-                    <span className={isActive ? "numb heart-active" : "numb"}></span>
+            <div className={isActive?"heart-btn active":"heart-btn"} onClick={this.handleClicked}>
+                <div className="content">
+                    <span className="heart"></span>
+                    <span className="text">Like</span>
                 </div>
             </div>
         </div>
