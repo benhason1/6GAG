@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route('/')
 .get((req,res)=>{
-    res.sendFile(req.query.path)
+    res.sendfile(req.query.path)
 })
 
 export default router;

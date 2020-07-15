@@ -48,7 +48,6 @@ class Upload extends Component {
         }
 
 
-
         axios.post(`${Config.serverPostsRoute}`, formData)
             // .then(_ => { this.state.isSuccedded = true })
             .then(_=>toast.success("upload succeeded!",{position:toast.POSITION.BOTTOM_RIGHT}))
