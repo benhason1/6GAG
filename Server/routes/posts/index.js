@@ -21,7 +21,9 @@ class PostsRouter {
                 res.send("deleting the specified post")
             })
             .put((req, res) => {
-                res.send("updating post according to action in body working")
+                axios.put(`${config.DBIp}/posts/${req.params.id}`,req.body)
+                .then((dbRes)=>res.send(dbRes))
+                .catch((err)=>res.send(err))
             })
 
 
