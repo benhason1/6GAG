@@ -8,39 +8,43 @@ export default class LikeButton extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isActive: false
+            isActive: this.props.isLiked,
+            likesNumber : this.props.likes
         }
     }
 
-    handleClicked= ()=>{
-        // this.props.onClick();
-        let {likesNumber, id} = this.props
-        const { isActive } = this.state
 
-        //if the likes button is already active
-        if(isActive){
-            likesNumber -=1;
+    handleClicked = () => {
+        let { id } = this.props
+        let { isActive,likesNumber } = this.state
+        
+        if (isActive) {
+            likesNumber -= 1;
         }
-        else{
-            likesNumber +=1
+        else {
+            likesNumber += 1
         }
 
-        axios.put(`${Config.serverPostsRoute}/${id}`,{"Action":"like"})
-        .then(()=>console.log("updated"))
-        .catch((err)=>console.log(err))
+        axios.put(`${Config.serverPostsRoute}/${id}`, { "Action": "like" })
+            .then(() => console.log("updated"))
+            .catch((err) => console.log(err))
 
-        this.setState({isActive:!isActive})
+        this.setState({ isActive: !isActive,likesNumber:likesNumber })
     }
 
     render() {
-        const { isActive } = this.state
-        
-        return <div className="heart-btn" onClick={this.handleClicked}>
-            <div className={isActive ? "content heart-active" : "content"}>
-                <span className={isActive ? "heart heart-active" : "heart"}></span>
-                <span className={isActive ? "text heart-active" : "text"}>Like</span>
-                <span className={isActive ? "numb heart-active" : "numb"}></span>
+        const { isActive,likesNumber } = this.state
+
+        return <div>
+            <span id="likes">{likesNumber} likes: </span>
+            <div className="heart-btn" onClick={this.handleClicked}>
+                <div className={isActive ? "content heart-active" : "content"}>
+                    <span className={isActive ? "heart heart-active" : "heart"}></span>
+                    <span className={isActive ? "text heart-active" : "text"}>Like</span>
+                    <span className={isActive ? "numb heart-active" : "numb"}></span>
+                </div>
             </div>
         </div>
+
     }
 }

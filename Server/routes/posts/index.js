@@ -21,7 +21,7 @@ class PostsRouter {
             })
             .put((req, res) => {
 
-                if(!req.body['Action'])
+                if (!req.body['Action'])
                     return res.send("request need to include action")
 
                 let action = req.body["Action"]
@@ -32,25 +32,23 @@ class PostsRouter {
                     axios.get(`${config.DBIp}/posts/${req.params.id}`)
                         .then((dbRes) => {
                             let dbResData = dbRes.data;
-                            if(!dbResData["PeopleLiked"])
-                            {
-                                axios.put(`${config.DBIp}/posts/${req.params.id}`, { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked':[req.ip]})
-                                .then((updateDbRes)=>res.send(updateDbRes))
-                                .catch((updateDbErr)=>res.send(updateDbErr))
-                                
+                            if (!dbResData["PeopleLiked"]) {
+                                updatedData = { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked': [req.ip] }
+
                             }
+
                             else if (dbResData["PeopleLiked"].includes(req.ip)) {
-                                axios.put(`${config.DBIp}/posts/${req.params.id}`, { 'likes': Number(dbResData['likes']) - 1, 'PeopleLiked':dbResData['PeopleLiked'].filter(item=>item!==req.ip)})
-                                .then((updateDbRes)=>res.send(updateDbRes))
-                                .catch((updateDbErr)=>res.send(updateDbErr))
+                                updatedData = { 'likes': Number(dbResData['likes']) - 1, 'PeopleLiked': dbResData['PeopleLiked'].filter(item => item !== req.ip) }
                             }
+
                             else {
                                 dbResData['PeopleLiked'].push(req.ip);
-                                updatedData = { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked':dbResData['PeopleLiked']}
-                                axios.put(`${config.DBIp}/posts/${req.params.id}`,updatedData )
-                                .then((updateDbRes)=>res.send(updateDbRes))
-                                .catch((updateDbErr)=>res.send(updateDbErr))
+                                updatedData = { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked': dbResData['PeopleLiked'] }
                             }
+
+                            axios.put(`${config.DBIp}/posts/${req.params.id}`, updatedData)
+                                .then((updateDbRes) => res.send(updateDbRes))
+                                .catch((updateDbErr) => res.send(updateDbErr))
                         })
                 }
 
@@ -60,7 +58,21 @@ class PostsRouter {
         this.router.route('/')
             .get((req, res) => {
                 axios.get(`${config.DBIp}/posts`, req)
-                    .then((dbRes) => res.send({ "items": dbRes.data }))
+                    .then((dbRes) => {
+                        dbRes.data.forEach(element => {
+                            if (!element["PeopleLiked"])
+                                element['isLiked'] = false
+                            else if (element["PeopleLiked"].includes(req.ip)) 
+                                element['isLiked'] = true
+                            else
+                                element['isLiked'] = false
+
+                            });
+
+                        res.send({ "items": dbRes.data })
+
+                    })
+
                     .catch((err) => {
                         res.status(err.response.status)
                         res.send(err)

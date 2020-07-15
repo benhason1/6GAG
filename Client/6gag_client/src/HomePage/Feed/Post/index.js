@@ -6,10 +6,13 @@ import Image from '../../../utils/Image'
 import { IconButton } from '@material-ui/core'
 import LikeButton from './LikeButton'
 
+
+
 function Post(props) {
 
-    const { title, postImage, id, altText, likes, comments } = props
 
+
+    const { title, postImage, id, altText, likes, comments, isLiked } = props
 
     let commentNumber = 0;
     if (typeof (comments) === Array)
@@ -25,9 +28,9 @@ function Post(props) {
         </div>
 
         <div className="post-data">
-            <LikeButton id={id}  likesNumber={Number(likes)}></LikeButton>
+            <LikeButton id={id}  likes={Number(likes)} isLiked={Boolean(isLiked)}></LikeButton>
 
-            <span id="likes">{likes} likes</span>
+          
             <span>
                 {commentNumber} comments
             </span>
