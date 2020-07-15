@@ -16,8 +16,11 @@ class Upload extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {}
-        this.initState()
+        this.state = {
+            postImage: null,
+            title: "",
+            altText: "",
+        }
     }
     
     initState = () => {

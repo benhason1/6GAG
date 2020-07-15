@@ -5,18 +5,16 @@ import '../../../utils/ErrorStyle/error.css'
 import Image from '../../../utils/Image'
 import { IconButton } from '@material-ui/core'
 import LikeButton from './Like'
-
-
+import CommentSection from './CommentSection'
 
 function Post(props) {
+    const { title, postImage, id, altText, likes, isLiked,comments } = props
 
-
-
-    const { title, postImage, id, altText, likes, comments, isLiked } = props
-
-    let commentNumber = 0;
-    if (typeof (comments) === Array)
-        commentNumber = comments.length
+    // let commentNumber = 0;
+    // if (comments instanceof(Array))
+    // {
+    //     commentNumber = comments.length
+    // }   
 
 
     return <div className="post">
@@ -30,10 +28,7 @@ function Post(props) {
         <div className="post-data">
             <LikeButton id={id}  likes={Number(likes)} isLiked={Boolean(isLiked)}></LikeButton>
 
-          
-            <span>
-                {commentNumber} comments
-            </span>
+            <CommentSection comments={comments instanceof(Array)?comments:[]}></CommentSection>
         </div>
     </div>
 }
