@@ -4,7 +4,7 @@ const
     config = require('../../../Configuration')
 
 module.exports = {
-    // list all users
+    // list users
     index: (req, res) => {
         axios.get(`${config.DBIp}/users`).
             then((dbRes) => res.send(dbRes.data))
