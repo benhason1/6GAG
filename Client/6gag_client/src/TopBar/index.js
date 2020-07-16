@@ -35,7 +35,6 @@ export default class TopBar extends Component {
 
                     <Tabs style={{ color: "black" }}>
                         <Tab label="Home" component={Link} to="/"  />
-                        <Tab label="login" component={Link} to="/login"  />
                     </Tabs>
 
                     <div id="upload-button">
@@ -46,7 +45,6 @@ export default class TopBar extends Component {
             </AppBar>
 
             <Route exact path="/" component={this.props.home}></Route>
-            <Route exact path="/login" component={this.props.login}></Route>
 
         </Router>
     }

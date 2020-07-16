@@ -4,15 +4,21 @@ import './App.css';
 import HomePage from './HomePage';
 import TopBar from './TopBar'
 import Login from './LoginPage'
+import { isAuthenticated } from './utils/Login'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <TopBar home={HomePage} login={Login}></TopBar>
-      </header>
-    </div>
-  );
+  if (!isAuthenticated()) {
+    return <Login></Login>
+  }
+  else {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <TopBar home={HomePage}></TopBar>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;

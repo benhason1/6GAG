@@ -1,6 +1,6 @@
 const
 	config = require('../Configuration')
-jwt = require('jsonwebtoken'),
+	jwt = require('jsonwebtoken'),
 	JWT_SECRET = config.jwtSecret
 axios = require('axios')
 // function for creating tokens

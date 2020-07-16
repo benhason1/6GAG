@@ -8,14 +8,21 @@ module.exports = {
     index: (req, res) => {
         axios.get(`${config.DBIp}/users`).
             then((dbRes) => res.send(dbRes.data))
-            .catch((err) => res.send({ success: false, code: err.code }))
+            .catch((err) => {
+                res.status(500)
+                res.send({ success: false, code: err.code })
+            })
     },
 
     // get one user
     show: (req, res) => {
         axios.get(`${config.DBIp}/users/${req.params.id}`).
             then((dbRes) => res.send(dbRes.data))
-            .catch((err) => res.send({ success: false, code: err.code }))
+            .catch(
+                (err) => {
+                    res.status(500)
+                    res.send({ success: false, code: err.code })
+                })
 
     },
 
@@ -75,13 +82,17 @@ module.exports = {
                 let userData = dbRes.data.user[0]
                 if (!userData || userData['password'] != password) {
                     // deny access
+                    res.status(501)
                     return res.send({ success: false, message: "Invalid credentials." })
                 }
                 const token = signToken(userData)
                 _updateTokenInDb(dbRes.data.user['id'], token, res)
 
             })
-            .catch((err) => res.send({ success: false, code: err.code }))
+            .catch((err) => {
+                res.status(500)
+                res.send({ success: false, code: err.code })
+            })
 
     }
 }
@@ -92,8 +103,10 @@ function _updateTokenInDb(userId, token, res) {
         then(_ => {
             res.send({ success: true, message: "Token attached.", token })
         })
-        .catch(_ => res.send({ success: false, message: "couldnt create token in db" })
-        )
+        .catch(_ => {
+            res.status(500)
+            res.send({ success: false, message: "couldnt create token in db" })
+        })
 
 }
 
