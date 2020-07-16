@@ -20,10 +20,6 @@ export default class TopBar extends Component {
         })
     }
 
-    handleChane() {
-        console.log("hi")
-    }
-
     render() {
         return <Router>
             <AppBar style={{ background: "#fff" }}>

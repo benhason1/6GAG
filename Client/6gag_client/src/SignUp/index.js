@@ -17,7 +17,7 @@ export default class SignUp extends Component {
 
     submitLogin(event) {
         event.preventDefault();
-        SignUp(this.state)
+        signUp(this.state)
             .then(token => window.location = '/')
             .catch(err => alert(err));
         event.target.reset();

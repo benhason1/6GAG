@@ -1,6 +1,5 @@
 import axios from 'axios'
-import React from 'react'
-import { Component } from 'react'
+import React, { Component } from 'react'
 import Config from "../../Configuration"
 
 class Image extends Component {
