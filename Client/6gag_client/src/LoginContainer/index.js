@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import React from 'react'
-import { AppBar, Toolbar, Button, Tab, Tabs } from '@material-ui/core'
+import { AppBar, Toolbar, Tab, Tabs } from '@material-ui/core'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 export default class TopBar extends Component {

@@ -13,7 +13,6 @@ export function login(data) {
 }
 
 export function isAuthenticated() {
-    var t = localStorage.getItem('x-access-token')
     return localStorage.getItem('x-access-token') && localStorage.getItem('x-access-token-expiration') > Date.now()
 }
 
