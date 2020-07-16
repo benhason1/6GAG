@@ -42,7 +42,7 @@ class PostsRouter {
 
 
         this.router.route('/')
-            .get((req, res) => {
+            .get(verifyToken,(req, res) => {
                 axios.get(`${config.DBIp}/posts`, req)
                     .then((dbRes) => {
 
@@ -50,7 +50,7 @@ class PostsRouter {
 
                             if (!post["PeopleLiked"])
                                 post['isLiked'] = false
-                            else if (post["PeopleLiked"].includes(req.ip))
+                            else if (post["PeopleLiked"].includes(req.user.id))
                                 post['isLiked'] = true
                             else
                                 post['isLiked'] = false
@@ -75,7 +75,7 @@ class PostsRouter {
                     headers: form.getHeaders()
                 })
                     .then((dbRes) => {
-                        res.send(dbRes.data)
+                        return res.send(dbRes.data)
                     }
                     )
                     .catch((err) => {

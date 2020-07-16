@@ -4,8 +4,10 @@ const axios = require('axios'),
 const likeAction = (req,res)=>{
 let updatedData = {}
 axios.get(`${config.DBIp}/posts/${req.params.id}`)
+
     .then((dbRes) => {
         let dbResData = dbRes.data;
+        //PeopleLiked is the people ids and likes is the number of likes
         if (!dbResData["PeopleLiked"]) {
             updatedData = { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked': [req.user.id] }
 
