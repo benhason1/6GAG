@@ -7,5 +7,5 @@ and all will work
 
 ## Summary
 
-all features working : upload, sign-up, login , like, comment
+all features working : upload, sign-up, login , like, comment.
 need to refresh to see new comments
