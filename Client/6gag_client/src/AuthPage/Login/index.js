@@ -4,26 +4,36 @@ import './login.css'
 import InputForm from '../InputForm'
 
 class Login extends Component {
-    constructor() {
-        super();
-        this.handleInputChange = this.handleInputChange.bind(this);
+    constructor(props) {
+        super(props)
+        this.state = { isFailed: false, errMsg: '' }
+        this.submitLogin = this.submitLogin.bind(this);
+
     }
 
-    handleInputChange(event,username,password) {
-        this.setState({ [event.target.name]: event.target.value })
-    }
-
-    submitLogin(username,password) {
-        login({"username":username,"password":password})
+    submitLogin(username, password) {
+        login({ "username": username, "password": password })
             .then(token => window.location = '/')
-            .catch(err => alert(err));
+            .catch(err => {
+                this.setState({ isFailed: true, errMsg: err })
+            })
 
     }
 
     render() {
-        return <InputForm handleSubmit={this.submitLogin} title="Log In"/>
-    
+        if (this.state.isFailed) {
+            return (
+                <div>
+                    <h3>failed: {this.state.errMsg}</h3>
+                    <InputForm handleSubmit={this.submitLogin} title="Log In" />
+                </div>
+            )
+        }
+        else {
+            return <InputForm handleSubmit={this.submitLogin} title="Log In" />
+        }
     }
+
 
 }
 export default Login;

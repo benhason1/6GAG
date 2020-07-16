@@ -1,28 +1,27 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Button, TextField, MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 
-class InputForm extends Component{
-    constructor(props){
+class InputForm extends Component {
+    constructor(props) {
         super(props)
         this.state = { username: '', password: '' };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        
+
     }
     handleInputChange(event) {
         this.setState({ [event.target.name]: event.target.value })
     }
 
-    onSubmit(event){
-        const {username,password} = this.state
+    onSubmit(event) {
+        const { username, password } = this.state
         event.preventDefault();
-        this.props.handleSubmit(username,password)
+        this.props.handleSubmit(username, password)
         event.target.reset();
 
     }
 
-    render(){
-        const {username,password} = this.state
+    render() {
         const theme = createMuiTheme({
             palette: {
                 primary: {
@@ -36,11 +35,11 @@ class InputForm extends Component{
                 }
             },
         });
-    
+
         const style = {
             margin: 15,
         };
-    return <form onSubmit={this.onSubmit}>
+        return <form onSubmit={this.onSubmit}>
             <MuiThemeProvider theme={theme}>
                 <div>
                     <h3>{this.props.title}</h3>
@@ -49,6 +48,7 @@ class InputForm extends Component{
                         label="username"
                         name="username"
                         onChange={this.handleInputChange}
+                        required
                     />
                     <br />
                     <TextField
@@ -56,12 +56,13 @@ class InputForm extends Component{
                         label="password"
                         name="password"
                         onChange={this.handleInputChange}
+                        required
                     />
                     <br />
                     <Button variant="contained" primary={true} style={style} type="submit">Submit!</Button>
                 </div>
             </MuiThemeProvider>
         </form>
-        }
+    }
 }
 export default InputForm;
