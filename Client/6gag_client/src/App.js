@@ -10,7 +10,11 @@ import LoginContainer from './LoginContainer'
 
 function App() {
   if (!isAuthenticated()) {
-    return <LoginContainer login={Login} signUp={SignUpPage}></LoginContainer>
+    return     <div className="App">
+        <header className="App-header">
+    <LoginContainer login={Login} signUp={SignUpPage}></LoginContainer>
+    </header>
+    </div>
   }
   else {
     return (
