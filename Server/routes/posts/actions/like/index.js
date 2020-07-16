@@ -7,16 +7,16 @@ axios.get(`${config.DBIp}/posts/${req.params.id}`)
     .then((dbRes) => {
         let dbResData = dbRes.data;
         if (!dbResData["PeopleLiked"]) {
-            updatedData = { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked': [req.ip] }
+            updatedData = { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked': [req.user.id] }
 
         }
 
-        else if (dbResData["PeopleLiked"].includes(req.ip)) {
-            updatedData = { 'likes': Number(dbResData['likes']) - 1, 'PeopleLiked': dbResData['PeopleLiked'].filter(item => item !== req.ip) }
+        else if (dbResData["PeopleLiked"].includes(req.user.id)) {
+            updatedData = { 'likes': Number(dbResData['likes']) - 1, 'PeopleLiked': dbResData['PeopleLiked'].filter(item => item !== req.user.id) }
         }
 
         else {
-            dbResData['PeopleLiked'].push(req.ip);
+            dbResData['PeopleLiked'].push(req.user.id);
             updatedData = { 'likes': Number(dbResData['likes']) + 1, 'PeopleLiked': dbResData['PeopleLiked'] }
         }
 
