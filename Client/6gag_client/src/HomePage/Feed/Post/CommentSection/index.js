@@ -1,9 +1,6 @@
 import React from 'react'
-import CommentForm from './CommentForm'
 import './commentSection.css'
-import { Paper, AppBar } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
-import { black } from 'color-name'
 
 
 

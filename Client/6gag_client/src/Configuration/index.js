@@ -1,9 +1,10 @@
 const config = {
-    serverPostsRoute : 'http://192.168.1.117:4000/posts',
+    serverPostsRoute: 'http://192.168.1.117:4000/posts',
     serverFilesRoute: 'http://192.168.1.117:4000/files',
-    postInitData:{
-        likes:0,
-        comments:[]
+    serverUsersRoute: 'http://192.168.1.117:4000/users',
+    postInitData: {
+        likes: 0,
+        comments: []
     }
 }
 

@@ -16,6 +16,7 @@ class Upload extends Component {
 
     constructor(props) {
         super(props)
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.state = {
             postImage: null,
             title: "",
@@ -31,12 +32,9 @@ class Upload extends Component {
         this.setState({ postImage: event.target.files[0]});
     };
 
-    onTitleChange = event => {
-        this.setState({ title: event.target.value })
-    }
-    onAltTextChange = event => {
-        this.setState({ altText: event.target.value })
 
+    handleInputChange(event) {
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     onSubmit = (event) => {
@@ -66,15 +64,14 @@ class Upload extends Component {
                 <form onSubmit={this.onSubmit}>
 
                     <div>
-                        <TextField type="text" label="Title" onChange={this.onTitleChange} required></TextField>
+                        <TextField type="text" label="Title" name="title" onChange={this.handleInputChange} required></TextField>
+                    </div>
+                    <div>
+                        <TextField type="text" label="Alt Text" name="altText" onChange={this.handleInputChange} required></TextField>
                     </div>
 
                     <div>
-                        <TextField type="text" label="Alt Text" onChange={this.onAltTextChange} required></TextField>
-                    </div>
-
-                    <div>
-                        <input type="file" accept=".jpg, .jpeg, .png" onChange={this.onFileChange} required/>
+                        <input type="file" accept=".jpg, .jpeg, .png" name="postImage" onChange={this.onFileChange} required/>
                         <StepButton type="submit">
                             Submit!
                         </StepButton>

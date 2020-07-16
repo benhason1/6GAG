@@ -1,17 +1,15 @@
 import React from 'react'
 import { Component } from 'react'
 import Popup from '../../../utils/Popup'
-import { AppBar, Toolbar, Button } from '@material-ui/core'
+import { AppBar } from '@material-ui/core'
 
 import ReactTooltip from 'react-tooltip'
 import './post.css'
 import '../../../utils/ErrorStyle/error.css'
 import Image from '../../../utils/Image'
-import { IconButton, Paper } from '@material-ui/core'
 import LikeButton from './Like'
 import CommentSection from './CommentSection'
 import CommentForm from './CommentSection/CommentForm'
-import UploadPostForm from '../../../UploadPostForm'
 
 export default class Post extends Component {
     constructor(props) {

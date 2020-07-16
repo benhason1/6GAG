@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import React from 'react'
-import { AppBar, Toolbar, IconButton, Button, Tab, Tabs } from '@material-ui/core'
+import { AppBar, Toolbar, Button, Tab, Tabs } from '@material-ui/core'
 import './TopBar.css'
 import UploadPostForm from '../UploadPostForm'
 import Popup from '../utils/Popup'
@@ -34,8 +34,8 @@ export default class TopBar extends Component {
                         </div>
 
                     <Tabs style={{ color: "black" }}>
-                        <Tab label="Home" component={Link} to="/" onChange={this.handleChane} />
-                        <Tab label="login" component={Link} to="/login" onChange={this.handleChane} />
+                        <Tab label="Home" component={Link} to="/"  />
+                        <Tab label="login" component={Link} to="/login"  />
                     </Tabs>
 
                     <div id="upload-button">
@@ -46,6 +46,8 @@ export default class TopBar extends Component {
             </AppBar>
 
             <Route exact path="/" component={this.props.home}></Route>
+            <Route exact path="/login" component={this.props.login}></Route>
+
         </Router>
     }
 }
