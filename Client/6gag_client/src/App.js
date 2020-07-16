@@ -5,7 +5,7 @@ import HomePage from './HomePage';
 import TopBar from './TopBar'
 import Login from './Login'
 import SignUpPage from './SignUp'
-import { isAuthenticated } from './utils/Login'
+import { isAuthenticated } from './Services/AuthServices'
 import LoginContainer from './LoginContainer'
 
 function App() {

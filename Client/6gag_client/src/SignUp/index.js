@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { signUp } from '../utils/Login';
+import { signUp } from '../Services/AuthServices';
 import {Button, TextField, MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 
 

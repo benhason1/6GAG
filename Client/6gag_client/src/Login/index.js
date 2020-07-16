@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login } from '../utils/Login';
+import { login } from '../Services/AuthServices';
 import './login.css'
 import { Button,TextField, MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 
@@ -17,7 +17,6 @@ class Login extends Component {
 
     submitLogin(event) {
         event.preventDefault();
-        console.log(this.state)
         login(this.state)
             .then(token => window.location = '/')
             .catch(err => alert(err));
