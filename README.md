@@ -2,7 +2,7 @@
 
 ## Configuration
 
-in DB, Server and Client there are configuration files, just configure the port, ip to right adresses
+in DB, Server and Client there are configuration files, just configure the port & ip to your adresses
 and all will work
 
 ## Summary
