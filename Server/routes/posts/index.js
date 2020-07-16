@@ -4,17 +4,13 @@ const
     postsCtrl = require('./PostsController')
 
 class PostsRouter {
-    constructor(multerUpload, nameToAction) {
-        this.nameToAction = nameToAction
+    constructor(multerUpload) {
         this.multerUpload = multerUpload
         this.router = express.Router()
         this._InitializeRouter();
     }
 
     _InitializeRouter() {
-
-
-
 
         this.router.route('/:id')
             .put(verifyToken,postsCtrl.update)

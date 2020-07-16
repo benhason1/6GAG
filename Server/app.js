@@ -7,13 +7,10 @@ const
       app = express(),
       posts = require('./routes/posts'),
       filesRouter = require('./routes/files'),
-      usersRouter = require('./routes/users'),
-      likeAction = require('./routes/posts/actions/like'),
-      commentAction = require('./routes/posts/actions/comment'),
+      usersRouter = require('./routes/users')
 
-nameToAction = {'like':likeAction,'comment':commentAction}
 
-const postsRouter = new posts(upload,nameToAction)
+const postsRouter = new posts(upload)
 
 var corsOptions = {
     origin: '*',
