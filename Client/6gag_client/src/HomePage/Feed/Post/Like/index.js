@@ -27,7 +27,7 @@ export default class LikeButton extends Component {
             likesNumber += 1
         }
 
-        axios.put(`${Config.serverPostsRoute}/${id}`, { "Action": "like" }, { "headers": { "token": localStorage.getItem("x-access-token") } })
+        axios.put(`${Config.serverPostsRoute}/${id}`, { "Action": "like" }, { "headers": { "token": localStorage.getItem(Config.accessTokenName) } })
             .then(() => console.log("updated"))
             .catch((err) => console.log(err))
 

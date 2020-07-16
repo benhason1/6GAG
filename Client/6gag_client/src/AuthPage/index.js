@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AppBar, Toolbar, Tab, Tabs } from '@material-ui/core'
-import { BrowserRouter as Router, Link, Route,Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom';
 import Login from './Login'
 import SignUp from './SignUp'
 
@@ -9,7 +9,7 @@ export default class TopBar extends Component {
     render() {
         return <Router>
             <AppBar style={{ background: "#fff" }}>
-                <Redirect to="/login"/>
+                <Redirect to="/login" />
                 <Toolbar >
                     <div id="six-gag-logo">
                         6gag
@@ -17,7 +17,7 @@ export default class TopBar extends Component {
 
                     <Tabs style={{ color: "black" }} initialSelected={1}>
                         <Tab label="login" component={Link} to="/login" value={2} />
-                        <Tab label="signUp" component={Link} to="/signUp" value={1}  />
+                        <Tab label="signUp" component={Link} to="/signUp" value={1} />
                     </Tabs>
 
                 </Toolbar>
