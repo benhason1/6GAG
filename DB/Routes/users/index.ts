@@ -20,6 +20,7 @@ class UsersRouter {
 
                 res.send({ "user": DbResponse })
             })
+
             .put((req, res) => {
                 res.send(this.dataBaseWrapper.update('users', req.params.id, req.body))
             })
@@ -29,6 +30,7 @@ class UsersRouter {
             .get((req, res) => {
                 res.send(this.dataBaseWrapper.getTop("users", config.DefaultNumberOfPostsToSend))
             })
+            
             .post((req, res) => {
                 res.status(200)
                 res.send({ "user": this.dataBaseWrapper.save("users", req.body) })
