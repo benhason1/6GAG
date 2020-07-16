@@ -63,9 +63,10 @@ module.exports = {
     authenticate: (req, res) => {
         // check if the user exists
 
-        if (!req.body.username || !req.body.password)
-            return res.send({ success: false, message: "must have username and paswword in body" })
-
+        if (!req.body.username || !req.body.password) {
+            res.status(401)
+            return res.send({ success: false, message: "must have username and password in body" })
+        }
         let username = req.body.username
         let password = req.body.password
 
@@ -79,7 +80,7 @@ module.exports = {
                 const token = signToken(userData)
                 _updateTokenInDb(dbRes.data.user['id'], token, res)
 
-            }) 
+            })
             .catch((err) => res.send({ success: false, code: err.code }))
 
     }

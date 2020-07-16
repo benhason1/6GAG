@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Config from "../Configuration"
 import TextField from '@material-ui/core/TextField'
 import StepButton from '@material-ui/core/StepButton'
-import {ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./upload.css"
 
@@ -23,13 +23,13 @@ class Upload extends Component {
             altText: "",
         }
     }
-    
+
     initState = () => {
-        this.setState({...this.initialState})
+        this.setState({ ...this.initialState })
     }
 
     onFileChange = event => {
-        this.setState({ postImage: event.target.files[0]});
+        this.setState({ postImage: event.target.files[0] });
     };
 
 
@@ -44,15 +44,18 @@ class Upload extends Component {
             formData.append(key, this.state[key])
         }
 
-        for(let key of Object.keys(Config.postInitData)){
+        for (let key of Object.keys(Config.postInitData)) {
             formData.append(key, Config.postInitData[key])
         }
 
 
         axios.post(`${Config.serverPostsRoute}`, formData)
             // .then(_ => { this.state.isSuccedded = true })
-            .then(_=>toast.success("upload succeeded!",{position:toast.POSITION.BOTTOM_RIGHT}))
-            .catch(_=>toast.error("upload failed",{position:toast.POSITION.BOTTOM_RIGHT,}))
+            .then(_ => toast.success("upload succeeded!", { position: toast.POSITION.BOTTOM_RIGHT }))
+            .catch(err => {
+                console.log(err.message)
+                toast.error("upload failed", { position: toast.POSITION.BOTTOM_RIGHT, })
+            })
         //clean form and state
         event.target.reset();
         this.initState()
@@ -60,7 +63,7 @@ class Upload extends Component {
 
     render() {
         return (
-            <div style={{ "color": "black"}}>
+            <div style={{ "color": "black" }}>
                 <form onSubmit={this.onSubmit}>
 
                     <div>
@@ -71,12 +74,12 @@ class Upload extends Component {
                     </div>
 
                     <div>
-                        <input type="file" accept=".jpg, .jpeg, .png" name="postImage" onChange={this.onFileChange} required/>
+                        <input type="file" accept=".jpg, .jpeg, .png" name="postImage" onChange={this.onFileChange} required />
                         <StepButton type="submit">
                             Submit!
                         </StepButton>
                     </div>
-                    <ToastContainer style={{fontSize:"30px"}}></ToastContainer>
+                    <ToastContainer style={{ fontSize: "30px" }}></ToastContainer>
                 </form>
             </div>
         );

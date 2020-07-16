@@ -6,7 +6,6 @@ const express = require('express'),
       verifyToken = require('../../Auth').verifyToken
 
 
-router.use(verifyToken)
 router.route('/')
 .get((req,res)=>{
     request(`${config.DBIp}${req.originalUrl}`).pipe(res)

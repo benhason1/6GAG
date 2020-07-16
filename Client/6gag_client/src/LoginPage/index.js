@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 class Login extends Component {
     constructor() {
         super();
-        this.state = { userName: '', password: '' };
+        this.state = { username: '', password: '' };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.submitLogin = this.submitLogin.bind(this);
     }
@@ -53,9 +53,9 @@ class Login extends Component {
                     <div>
                         <h3>login</h3>
                         <TextField
-                            hintText="Enter your Username"
-                            label="Username"
-                            name="userName"
+                            hintText="Enter your username"
+                            label="username"
+                            name="username"
                             onChange={this.handleInputChange}
                         />
                         <br />

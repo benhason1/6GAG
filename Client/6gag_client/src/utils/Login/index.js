@@ -3,11 +3,12 @@ import axios from 'axios'
 
 
 export function login(data) {
-    return axios.post(`${Config.serverUsersRoute}/users/login`, { name: data.name, password: data.password })
+    return axios.post(`${Config.serverUsersRoute}/login`, { username: data.username, password: data.password })
         .then(response => {
+            console.log(response.data)
             localStorage.setItem('x-access-token', response.data.token);
             localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 1000);
-            return response.data
+            return response.data 
         })
         .catch(err => Promise.reject('Authentication Failed!'));
 }
