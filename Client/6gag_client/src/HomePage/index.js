@@ -15,7 +15,7 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
-        fetch(`${Config.serverPostsRoute}`,{ "headers": { "token": localStorage.getItem("x-access-token") } })
+        fetch(`${Config.serverPostsRoute}`, { "headers": { "token": localStorage.getItem("x-access-token") } })
             .then(res => res.json())
             .then(
                 (result) => {

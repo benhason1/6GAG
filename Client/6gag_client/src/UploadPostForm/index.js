@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Config from "../Configuration"
-import {TextField,StepButton} from '@material-ui/core'
+import { TextField, StepButton } from '@material-ui/core'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./upload.css"

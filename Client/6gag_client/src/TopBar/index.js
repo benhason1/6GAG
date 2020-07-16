@@ -30,9 +30,9 @@ export default class TopBar extends Component {
                         </div>
 
                     <Tabs style={{ color: "black" }}>
-                        <Tab label="Home" component={Link} to="/"  />
-                        <Tab label="login" component={Link} to="/login"  />
-                        <Tab label="signUp" component={Link} to="/signUp"  />
+                        <Tab label="Home" component={Link} to="/" />
+                        <Tab label="login" component={Link} to="/login" />
+                        <Tab label="signUp" component={Link} to="/signUp" />
                     </Tabs>
 
                     <div id="upload-button">

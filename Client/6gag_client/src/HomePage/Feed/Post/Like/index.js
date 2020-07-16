@@ -11,15 +11,15 @@ export default class LikeButton extends Component {
         this.state = {
             isFirst: true,
             isActive: this.props.isLiked,
-            likesNumber : this.props.likes
+            likesNumber: this.props.likes
         }
     }
 
 
     handleClicked = () => {
         let { id } = this.props
-        let { isActive,likesNumber } = this.state
-        
+        let { isActive, likesNumber } = this.state
+
         if (isActive) {
             likesNumber -= 1;
         }
@@ -27,22 +27,22 @@ export default class LikeButton extends Component {
             likesNumber += 1
         }
 
-        axios.put(`${Config.serverPostsRoute}/${id}`, { "Action": "like" },{ "headers": { "token": localStorage.getItem("x-access-token") } })
+        axios.put(`${Config.serverPostsRoute}/${id}`, { "Action": "like" }, { "headers": { "token": localStorage.getItem("x-access-token") } })
             .then(() => console.log("updated"))
             .catch((err) => console.log(err))
 
-        this.setState({ isActive: !isActive,likesNumber:likesNumber,isFirst:false })
+        this.setState({ isActive: !isActive, likesNumber: likesNumber, isFirst: false })
     }
 
     render() {
-        const { isActive,likesNumber,isFirst } = this.state
-        
+        const { isActive, likesNumber, isFirst } = this.state
+
         //if first render of page doesnt show like animation
         let heartClassNames = classNames(
             {
-                "heart heart-already-active":isActive&&isFirst,
-                "heart heart-active":isActive && !isFirst,
-                "heart":!isActive
+                "heart heart-already-active": isActive && isFirst,
+                "heart heart-active": isActive && !isFirst,
+                "heart": !isActive
             }
         )
 

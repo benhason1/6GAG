@@ -7,7 +7,7 @@ export function login(data) {
         .then(response => {
             localStorage.setItem('x-access-token', response.data.token);
             localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 1000);
-            return response.data 
+            return response.data
         })
         .catch(err => Promise.reject('Authentication Failed!'));
 }
@@ -17,12 +17,12 @@ export function isAuthenticated() {
 }
 
 
-export function signUp(data){
-    return axios.post(`${Config.serverUsersRoute}`,{username:data.username,password:data.password})
-    .then(response => {
-        localStorage.setItem('x-access-token', response.data.token);
-        localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 1000);
-        return response.data 
-    })
-    .catch(err => Promise.reject(err.response.data.message));
+export function signUp(data) {
+    return axios.post(`${Config.serverUsersRoute}`, { username: data.username, password: data.password })
+        .then(response => {
+            localStorage.setItem('x-access-token', response.data.token);
+            localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 1000);
+            return response.data
+        })
+        .catch(err => Promise.reject(err.response.data.message));
 }
