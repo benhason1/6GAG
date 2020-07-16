@@ -1,5 +1,5 @@
-const axios = require('axios')
-const config = require('../../Configuration')
+const axios = require('axios'),
+     config = require('../../../../Configuration')
 
 const likeAction = (req,res)=>{
 let updatedData = {}

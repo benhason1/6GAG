@@ -1,16 +1,15 @@
-const config = require('./Configuration')
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const upload = require('./MulterInitializer')
-const app = express()
-
-const posts = require('./routes/posts')
-const filesRouter = require('./routes/files')
-const usersRouter = require('./routes/users')
-
-const likeAction = require('./routes/posts/actions/like')
-const commentAction = require('./routes/posts/actions/comment')
+const 
+      config = require('./Configuration'),
+      express = require('express'),
+      bodyParser = require('body-parser'),
+      cors = require('cors'),
+      upload = require('./MulterInitializer'),
+      app = express(),
+      posts = require('./routes/posts'),
+      filesRouter = require('./routes/files'),
+      usersRouter = require('./routes/users'),
+      likeAction = require('./routes/posts/actions/like'),
+      commentAction = require('./routes/posts/actions/comment'),
 
 nameToAction = {'like':likeAction,'comment':commentAction}
 
@@ -28,6 +27,5 @@ app.use(bodyParser.json())
 app.use("/posts",postsRouter.router);
 app.use("/files",filesRouter)
 app.use("/users",usersRouter)
-
 
 app.listen(config.ExpressAppPort)

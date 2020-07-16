@@ -15,6 +15,5 @@ usersRouter.use(verifyToken)
 usersRouter.route('/:id')
     .get(usersCtrl.show)
     .put(usersCtrl.update)
-    .delete(usersCtrl.destroy)
 
 module.exports = usersRouter

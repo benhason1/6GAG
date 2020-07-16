@@ -1,5 +1,6 @@
-const axios = require('axios')
-const config = require('../../Configuration')
+const axios = require('axios'),
+      config = require('../../../../Configuration')
+
 
 
 const commentAction = (req, res) => {

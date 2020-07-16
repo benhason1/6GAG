@@ -3,7 +3,7 @@ const axios = require('axios')
 const config = require('../../Configuration')
 const FormData = require('form-data')
 const request = require('request')
-const verifyToken = require('./Auth').verifyToken
+const verifyToken = require('../../Auth').verifyToken
 
 
 
@@ -17,7 +17,7 @@ class PostsRouter {
 
     _InitializeRouter() {
 
-        usersRouter.use(verifyToken)
+        this.router.use(verifyToken)
         this.router.route('/:id')
             .get((req, res) => {
                 res.send("returning the specified post")
@@ -68,7 +68,7 @@ class PostsRouter {
                     })
             })
 
-            usersRouter.use(verifyToken)
+            this.router.use(verifyToken)
             .post(this.multerUpload.single('postImage'), (req, res) => {
 
                 const form = this._reqToFormData(req)
