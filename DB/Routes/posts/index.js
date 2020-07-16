@@ -25,24 +25,24 @@ var PostsRouter = /** @class */ (function () {
         this.router.route('/:id')
             .get(function (req, res) {
             var id = req.params.id;
-            var DbResponse = _this.dataBaseWrapper.getByID(id);
+            var DbResponse = _this.dataBaseWrapper.getByID("posts", id);
             if (DbResponse === null)
                 res.status(422);
             res.send(DbResponse);
         })
             .put(function (req, res) {
-            res.send(_this.dataBaseWrapper.update(req.params.id, req.body));
+            res.send(_this.dataBaseWrapper.update("posts", req.params.id, req.body));
         });
         this.router.route('/')
             .get(function (req, res) {
-            res.send(_this.dataBaseWrapper.getTop(Configuration_1["default"].DefaultNumberOfPostsToSend));
+            res.send(_this.dataBaseWrapper.getTop("posts", Configuration_1["default"].DefaultNumberOfPostsToSend));
         })
             .post(this.multerUpload.single('postImage'), function (req, res) {
             if (!req.file) {
                 res.status(500);
                 return res.send("didnt sent file");
             }
-            res.send(_this.dataBaseWrapper.save(__assign(__assign({}, req.body), { "postImage": req.file.path })));
+            res.send(_this.dataBaseWrapper.save("posts", __assign(__assign({}, req.body), { "postImage": req.file.path })));
         });
     };
     return PostsRouter;

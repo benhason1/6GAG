@@ -6,7 +6,7 @@ import MemoryDB from './Dal/MemoryDataBase'
 import posts from './Routes/posts'
 import filesRouter from './Routes/files'
 import upload from './MulterInitializer'
-import usersRouter from './Routes/users'
+// import usersRouter from './Routes/users'
 
 
 const postsRouter = new posts(MemoryDB, upload)
@@ -24,6 +24,6 @@ app.use(bodyParser.json())
 
 app.use("/posts", postsRouter.router)
 app.use("/files", filesRouter)
-app.use("/users",usersRouter)
+// app.use("/users",usersRouter)
 
 app.listen(config.ExpressAppPort)
