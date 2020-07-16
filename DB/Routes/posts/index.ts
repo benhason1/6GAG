@@ -1,8 +1,6 @@
 import * as express from "express";
 import config from "../../Configuration"
 
-
-
 class PostsRouter {
     dataBaseWrapper: IDataBase
     router: any;
@@ -46,4 +44,4 @@ class PostsRouter {
 
 }
 
-export default PostsRouter;
+export default PostsRouter; 

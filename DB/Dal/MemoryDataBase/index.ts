@@ -2,23 +2,32 @@ import * as uuid from 'uuid'
 import * as _ from 'lodash'
 
 class MemoryDataBase implements IDataBase {
-    memory: object[];
+    memory: {}
     constructor() {
-        this.memory = []
+        this.memory = {}
     }
 
-    save(obj: Object) {
+    save(category:string, obj: Object) {
+        if(!this.memory[category]){
+            this.memory[category] = []    
+        }
         obj["id"] = uuid.v4()
-        this.memory.push(obj)
+        this.memory[category].push(obj)
         return obj;
     }
 
-    getTop(size: number): Object[] {
-        return this.memory.slice(0, size)
+    getTop(category:string,size: number): Object[] {
+        if(!this.memory[category])
+            return []
+
+        return this.memory[category].slice(0, size)
     }
 
-    getByID(id: string): object {
-        let res = _.find(this.memory, { "id": id })
+    getByID(category:string, id: string): object {
+        if(!this.memory[category])
+            return null
+
+        let res = _.find(this.memory[category], { "id": id })
 
         if (res == undefined)
             return null;
@@ -26,20 +35,26 @@ class MemoryDataBase implements IDataBase {
         return res;
     }
 
-    getByQuery(matchItems: Object): Object[] {
-        return _.filter(this.memory, matchItems)
+    getByQuery(category:string, matchItems: Object): Object[] {
+        if(!this.memory[category])
+            return []
+
+        return _.filter(this.memory[category], matchItems)
     }
 
-    update(id: string, updatedItems:Object): Object {
-        let index = _.findIndex(this.memory, { "id": id })
+    update(category:string ,id: string, updatedItems:Object): Object {
+        if(!this.memory[category])
+            return null
+
+        let index = _.findIndex(this.memory[category], { "id": id })
         if (index == -1)
             return null
         
         for(let key of Object.keys(updatedItems)){
-            this.memory[index][key] = updatedItems[key]
+            this.memory[category][index][key] = updatedItems[key]
         }
 
-        return this.memory[index]
+        return this.memory[category][index]
         
     }
 
