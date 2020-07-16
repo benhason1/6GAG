@@ -6,13 +6,13 @@ import TopBar from './TopBar'
 import Login from './Login'
 import SignUpPage from './SignUp'
 import { isAuthenticated } from './Services/AuthServices'
-import LoginContainer from './LoginContainer'
+import AuthPage from './AuthPage'
 
 function App() {
   if (!isAuthenticated()) {
     return     <div className="App">
         <header className="App-header">
-    <LoginContainer login={Login} signUp={SignUpPage}></LoginContainer>
+    <AuthPage login={Login} signUp={SignUpPage}></AuthPage>
     </header>
     </div>
   }
