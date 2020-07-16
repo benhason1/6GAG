@@ -29,11 +29,11 @@ class Image extends Component {
 
     render() {
 
-        const{alt,className} =this.props
+        const { alt, className } = this.props
 
         if (this.state.error != null) {
             return <div>
-                    {this.state.error.message}
+                {this.state.error.message}
             </div>
         }
 
