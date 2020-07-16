@@ -4,17 +4,19 @@ import './App.css';
 import HomePage from './HomePage';
 import TopBar from './TopBar'
 import Login from './LoginPage'
+import SignUpPage from './SignUpPage'
 import { isAuthenticated } from './utils/Login'
+import LoginContainer from './LoginContainer'
 
 function App() {
   if (!isAuthenticated()) {
-    return <Login></Login>
+    return <LoginContainer login={Login} signUp={SignUpPage}></LoginContainer>
   }
   else {
     return (
       <div className="App">
         <header className="App-header">
-          <TopBar home={HomePage}></TopBar>
+          <TopBar home={HomePage} login={Login} signUp={SignUpPage}></TopBar>
         </header>
       </div>
     );

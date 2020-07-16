@@ -41,6 +41,7 @@ module.exports = {
                 userData = searchUserDbRes.data.user
                 // if the user has no token he marked as doesnt exist
                 if (userData && userData != 0 && userData[0].token) {
+                    res.status(409)
                     return res.send({ success: false, message: "User already exist." })
                 }
 
