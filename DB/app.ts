@@ -24,6 +24,6 @@ app.use(bodyParser.json())
 
 app.use("/posts", postsRouter.router)
 app.use("/files", filesRouter)
-app.use("/users",usersRouter.router)
+app.use("/users", usersRouter.router)
 
 app.listen(config.ExpressAppPort)

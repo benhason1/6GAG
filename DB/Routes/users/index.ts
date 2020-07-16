@@ -14,29 +14,29 @@ class UsersRouter {
         this.router.route('/:id')
             .get((req, res) => {
                 let id = req.params.id
-                let DbResponse = this.dataBaseWrapper.getByID("users",id)
+                let DbResponse = this.dataBaseWrapper.getByID("users", id)
                 if (DbResponse === null)
                     res.status(422)
 
-                res.send({"user":DbResponse})
+                res.send({ "user": DbResponse })
             })
             .put((req, res) => {
                 res.send(this.dataBaseWrapper.update('users', req.params.id, req.body))
             })
 
 
-            this.router.route('/')
-                .get((req, res) => {
+        this.router.route('/')
+            .get((req, res) => {
                 res.send(this.dataBaseWrapper.getTop("users", config.DefaultNumberOfPostsToSend))
             })
             .post((req, res) => {
                 res.status(200)
-                res.send({"user":this.dataBaseWrapper.save("users", req.body )})
+                res.send({ "user": this.dataBaseWrapper.save("users", req.body) })
             })
 
         this.router.route('/search')
             .post((req, res) => {
-                res.send({"user":this.dataBaseWrapper.getByQuery("users", req.body )})
+                res.send({ "user": this.dataBaseWrapper.getByQuery("users", req.body) })
             })
     }
 }

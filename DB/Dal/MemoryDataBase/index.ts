@@ -7,24 +7,24 @@ class MemoryDataBase implements IDataBase {
         this.memory = {}
     }
 
-    save(category:string, obj: Object) {
-        if(!this.memory[category]){
-            this.memory[category] = []    
+    save(category: string, obj: Object) {
+        if (!this.memory[category]) {
+            this.memory[category] = []
         }
         obj["id"] = uuid.v4()
         this.memory[category].push(obj)
         return obj;
     }
 
-    getTop(category:string,size: number): Object[] {
-        if(!this.memory[category])
+    getTop(category: string, size: number): Object[] {
+        if (!this.memory[category])
             return []
 
         return this.memory[category].slice(0, size)
     }
 
-    getByID(category:string, id: string): object {
-        if(!this.memory[category])
+    getByID(category: string, id: string): object {
+        if (!this.memory[category])
             return null
 
         let res = _.find(this.memory[category], { "id": id })
@@ -35,27 +35,27 @@ class MemoryDataBase implements IDataBase {
         return res;
     }
 
-    getByQuery(category:string, matchItems: Object): Object[] {
-        if(!this.memory[category])
+    getByQuery(category: string, matchItems: Object): Object[] {
+        if (!this.memory[category])
             return []
 
         return _.filter(this.memory[category], matchItems)
     }
 
-    update(category:string ,id: string, updatedItems:Object): Object {
-        if(!this.memory[category])
+    update(category: string, id: string, updatedItems: Object): Object {
+        if (!this.memory[category])
             return null
 
         let index = _.findIndex(this.memory[category], { "id": id })
         if (index == -1)
             return null
-        
-        for(let key of Object.keys(updatedItems)){
+
+        for (let key of Object.keys(updatedItems)) {
             this.memory[category][index][key] = updatedItems[key]
         }
 
         return this.memory[category][index]
-        
+
     }
 
 
