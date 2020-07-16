@@ -69,12 +69,12 @@ module.exports = {
 
     // the login route
     authenticate: (req, res) => {
-        // check if the user exists
 
         if (!req.body.username || !req.body.password) {
             res.status(401)
             return res.send({ success: false, message: "must have username and password in body" })
         }
+
         let username = req.body.username
         let password = req.body.password
 
@@ -86,10 +86,12 @@ module.exports = {
                     res.status(501)
                     return res.send({ success: false, message: "Invalid credentials." })
                 }
+
                 const token = signToken(userData)
                 _updateTokenInDb(dbRes.data.user['id'], token, res)
 
             })
+
             .catch((err) => {
                 res.status(500)
                 res.send({ success: false, code: err.code })
@@ -98,7 +100,7 @@ module.exports = {
     }
 }
 
-
+//update token for user id in db
 function _updateTokenInDb(userId, token, res) {
     axios.put(`${config.DBIp}/users/${userId}`, { "token": token }).
         then(_ => {
