@@ -1,7 +1,7 @@
 const
     axios = require('axios'),
     config = require('../../../Configuration'),
-    FormData = require('form-data')
+    FormData = require('form-data'),
     nameToAction = require('../actions')
 
 module.exports = {
