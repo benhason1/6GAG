@@ -5,7 +5,7 @@ import './feed.css'
 function Feed(props) {
     const { items } = props
     if (!items) {
-        return <h3 id="no-posts">no Posts</h3>
+        return <h3 id="no-posts">not connected,login again</h3>
     }
     else {
         return (

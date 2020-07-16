@@ -10,9 +10,9 @@ const commentAction = (req, res) => {
         .then((dbRes) => {
             let dbResData = dbRes.data;
             if (!dbResData["comments"])
-                updatedData = { "comments": [req.body.payload.content] }
+                updatedData = { "comments": [{"commentContent":req.body.payload.content,"personPosted":req.user.username}] }
             else {
-                updatedData = { "comments": [...dbResData["comments"], req.body.payload.content] }
+                updatedData = { "comments": [...dbResData["comments"], {"commentContent":req.body.payload.content,"personPosted":req.user.username}] }
             }
 
             axios.put(`${config.DBIp}/posts/${req.params.id}`, updatedData)

@@ -14,7 +14,7 @@ function CommentSection(props) {
 
 
         {comments.map(item => {
-            return <div className="comment-content">{item}</div>
+        return <div className="comment-content">{item.personPosted}: {item.commentContent}</div>
         })}
 
     </div>
