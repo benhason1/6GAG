@@ -13,7 +13,12 @@ class UsersRouter {
     _InitializeRouter() {
         this.router.route('/:id')
             .get((req, res) => {
+                let id = req.params.id
+                let DbResponse = this.dataBaseWrapper.getByID("users",id)
+                if (DbResponse === null)
+                    res.status(422)
 
+                res.send({"user":DbResponse})
             })
             .put((req, res) => {
                 res.send(this.dataBaseWrapper.update('users', req.params.id, req.body))

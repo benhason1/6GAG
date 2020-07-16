@@ -12,6 +12,11 @@ var UsersRouter = /** @class */ (function () {
         var _this = this;
         this.router.route('/:id')
             .get(function (req, res) {
+            var id = req.params.id;
+            var DbResponse = _this.dataBaseWrapper.getByID("users", id);
+            if (DbResponse === null)
+                res.status(422);
+            res.send({ "user": DbResponse });
         })
             .put(function (req, res) {
             res.send(_this.dataBaseWrapper.update('users', req.params.id, req.body));
