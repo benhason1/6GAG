@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { AppBar, Toolbar, Tab, Tabs } from '@material-ui/core'
 import { BrowserRouter as Router, Link, Route,Redirect } from 'react-router-dom';
+import Login from './Login'
+import SignUp from './SignUp'
 
 export default class TopBar extends Component {
 
@@ -21,8 +23,8 @@ export default class TopBar extends Component {
                 </Toolbar>
             </AppBar>
 
-            <Route exact path="/login" component={this.props.login}></Route>
-            <Route exact path="/signUp" component={this.props.signUp}></Route>
+            <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/signUp" component={SignUp}></Route>
 
 
         </Router>

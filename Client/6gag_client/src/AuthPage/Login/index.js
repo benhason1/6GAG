@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { signUp } from '../Services/AuthServices';
-import {Button, TextField, MuiThemeProvider, createMuiTheme } from '@material-ui/core'
+import { login } from '../../Services/AuthServices';
+import './login.css'
+import { Button,TextField, MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 
 
-export default class SignUp extends Component {
+class Login extends Component {
     constructor() {
         super();
         this.state = { username: '', password: '' };
@@ -17,7 +18,7 @@ export default class SignUp extends Component {
 
     submitLogin(event) {
         event.preventDefault();
-        signUp(this.state)
+        login(this.state)
             .then(token => window.location = '/')
             .catch(err => alert(err));
         event.target.reset();
@@ -26,6 +27,7 @@ export default class SignUp extends Component {
     }
 
     render() {
+
         const theme = createMuiTheme({
             palette: {
                 primary: {
@@ -47,7 +49,7 @@ export default class SignUp extends Component {
             <form onSubmit={this.submitLogin}>
                 <MuiThemeProvider theme={theme}>
                     <div>
-                        <h3>Sign Up</h3>
+                        <h3>login</h3>
                         <TextField
                             hintText="Enter your username"
                             label="username"
@@ -70,3 +72,4 @@ export default class SignUp extends Component {
     }
 
 }
+export default Login;
