@@ -13,11 +13,11 @@ class PostsRouter {
     _InitializeRouter() {
 
         this.router.route('/:id')
-            .put(verifyToken,postsCtrl.update)
+            .put(verifyToken, postsCtrl.update)
 
         this.router.route('/')
-            .get(verifyToken,postsCtrl.index)
-            .post(this.multerUpload.single('postImage'),verifyToken,postsCtrl.create)
+            .get(verifyToken, postsCtrl.index)
+            .post(this.multerUpload.single('postImage'), verifyToken, postsCtrl.create)
     }
 
 
