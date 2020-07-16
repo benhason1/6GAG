@@ -48,8 +48,9 @@ class Upload extends Component {
             formData.append(key, Config.postInitData[key])
         }
 
+        console.log({ "headers": localStorage.getItem("x-access-token") })
 
-        axios.post(`${Config.serverPostsRoute}`, formData)
+        axios.post(`${Config.serverPostsRoute}`, formData, { "headers": { "token": localStorage.getItem("x-access-token") } })
             // .then(_ => { this.state.isSuccedded = true })
             .then(_ => toast.success("upload succeeded!", { position: toast.POSITION.BOTTOM_RIGHT }))
             .catch(err => {
