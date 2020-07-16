@@ -1,44 +1,39 @@
-// import * as express from "express";
-// import config from "../../Configuration"
+import * as express from "express";
+import config from "../../Configuration"
 
-// class UsersRouter {
-//     dataBaseWrapper: IDataBase
-//     router: any;
-//     multerUpload: any;
-//     constructor(dataBaseWrapper: IDataBase, multerUpload) {
-//         this.dataBaseWrapper = dataBaseWrapper
-//         this.router = express.Router();
-//         this.multerUpload = multerUpload;
-//         this._InitializeRouter();
-//     }
+class UsersRouter {
+    dataBaseWrapper: IDataBase
+    router: any;
+    constructor(dataBaseWrapper: IDataBase) {
+        this.dataBaseWrapper = dataBaseWrapper
+        this.router = express.Router();
+        this._InitializeRouter();
+    }
 
-//     _InitializeRouter() {
-//         this.router.route('/')
-//             .get((req, res) => {
-//                 let id = req.params.id
-//                 let DbResponse = this.dataBaseWrapper.getByID(id)
-//                 if (DbResponse === null)
-//                     res.status(422)
+    _InitializeRouter() {
+        this.router.route('/:id')
+            .get((req, res) => {
 
-//                 res.send(DbResponse)
-//             })
-//             .put((req, res) => {
-//                 res.send(this.dataBaseWrapper.update(req.params.id, req.body))
-//             })
+            })
+            .put((req, res) => {
+                res.send(this.dataBaseWrapper.update('users', req.params.id, req.body))
+            })
 
 
-//         this.router.route('/')
-//             .get((req, res) => {
-//                 res.send(this.dataBaseWrapper.getTop(config.DefaultNumberOfPostsToSend))
-//             })
-//             .post(this.multerUpload.single('postImage'),(req, res) => {                
-//                 if(!req.file){
-//                     res.status(500)
-//                     return res.send("didnt sent file")
-//                 }
-//                 res.send(this.dataBaseWrapper.save({...req.body,"postImage":req.file.path}));
-//             })
-//     }
-// }
+            this.router.route('/')
+                .get((req, res) => {
+                res.send(this.dataBaseWrapper.getTop("users", config.DefaultNumberOfPostsToSend))
+            })
+            .post((req, res) => {
+                res.status(200)
+                res.send({"user":this.dataBaseWrapper.save("users", req.body )})
+            })
 
-// export default UsersRouter;
+        this.router.route('/search')
+            .post((req, res) => {
+                res.send({"user":this.dataBaseWrapper.getByQuery("users", req.body )})
+            })
+    }
+}
+
+export default UsersRouter;

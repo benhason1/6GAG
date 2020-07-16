@@ -9,8 +9,6 @@ module.exports = {
         axios.get(`${config.DBIp}/users`).
             then((dbRes) => res.send(dbRes.data))
             .catch((err) => res.send({ success: false, code: err.code }))
-
-
     },
 
     // get one user
@@ -23,12 +21,33 @@ module.exports = {
 
     // create a new user
     create: (req, res) => {
-        axios.post(`${config.DBIp}/users`).
-            then((dbRes) => {
-                const token = signToken(dbRes.data)
-                res.send({ success: true, message: "User created. Token attached.", token })
+        if (!req.body.username || !req.body.password)
+            return res.send({ success: false, message: "must have username and paswword in body" })
+
+        let username = req.body.username
+        let password = req.body.password
+
+        //check if user exist
+        axios.post(`${config.DBIp}/users/search`, { "username": username }).
+            then((searchUserDbRes) => {
+
+                userData = searchUserDbRes.data.user
+                // if the user has no token he marked as doesnt exist
+                if (userData && userData != 0 && userData[0].token) {
+                    return res.send({ success: false, message: "User already exist." })
+                }
+
+                else {
+                    axios.post(`${config.DBIp}/users`, { "username": username, "password": password })
+                        .then((userCreatedDbRes) => {
+                            var token = signToken(userCreatedDbRes.data.user)
+                            _updateTokenInDb(userCreatedDbRes.data.user.id, token, res)
+                        })
+                        .catch((err) => { return res.send({ success: false, code: err.code }) })
+                }
             })
-            .catch((err) => res.send({ success: false, code: err.code }))
+
+            .catch((err) => { return res.send({ success: false, code: err.code }) })
     },
 
     // update an existing user
@@ -44,17 +63,36 @@ module.exports = {
     authenticate: (req, res) => {
         // check if the user exists
 
-        axios.post(`${config.DBIp}/users/search`).
+        if (!req.body.username || !req.body.password)
+            return res.send({ success: false, message: "must have username and paswword in body" })
+
+        let username = req.body.username
+        let password = req.body.password
+
+        axios.post(`${config.DBIp}/users/search`, { "username": username }).
             then((dbRes) => {
-                if (!dbRes.user || dbRes.user['password'] != (req.body.password)) {
+                let userData = dbRes.data.user[0]
+                if (!userData || userData['password'] != password) {
                     // deny access
                     return res.send({ success: false, message: "Invalid credentials." })
                 }
-                const token = signToken(user)
-                res.send({ success: true, message: "Token attached.", token })
+                const token = signToken(userData)
+                _updateTokenInDb(dbRes.data.user['id'], token, res)
 
-            })
+            }) 
             .catch((err) => res.send({ success: false, code: err.code }))
 
     }
 }
+
+
+function _updateTokenInDb(userId, token, res) {
+    axios.put(`${config.DBIp}/users/${userId}`, { "token": token }).
+        then(_ => {
+            res.send({ success: true, message: "Token attached.", token })
+        })
+        .catch(_ => res.send({ success: false, message: "couldnt create token in db" })
+        )
+
+}
+

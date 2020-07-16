@@ -3,12 +3,12 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors'
 import config from './Configuration'
 import MemoryDB from './Dal/MemoryDataBase'
-import posts from './Routes/posts'
 import filesRouter from './Routes/files'
 import upload from './MulterInitializer'
-// import usersRouter from './Routes/users'
+import posts from './Routes/posts'
+import users from './Routes/users'
 
-
+const usersRouter = new users(MemoryDB);
 const postsRouter = new posts(MemoryDB, upload)
 
 const app = express()
@@ -24,6 +24,6 @@ app.use(bodyParser.json())
 
 app.use("/posts", postsRouter.router)
 app.use("/files", filesRouter)
-// app.use("/users",usersRouter)
+app.use("/users",usersRouter.router)
 
 app.listen(config.ExpressAppPort)

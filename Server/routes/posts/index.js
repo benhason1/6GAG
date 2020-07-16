@@ -8,7 +8,7 @@ const verifyToken = require('../../Auth').verifyToken
 
 
 class PostsRouter {
-    constructor(multerUpload,nameToAction) {
+    constructor(multerUpload, nameToAction) {
         this.nameToAction = nameToAction
         this.multerUpload = multerUpload
         this.router = express.Router()
@@ -17,7 +17,6 @@ class PostsRouter {
 
     _InitializeRouter() {
 
-        this.router.use(verifyToken)
         this.router.route('/:id')
             .get((req, res) => {
                 res.send("returning the specified post")
@@ -25,38 +24,38 @@ class PostsRouter {
             .delete((req, res) => {
                 res.send("deleting the specified post")
             })
-            .put((req, res) => {
+            .put(verifyToken, (req, res) => {
 
                 if (!req.body['Action'])
                     return res.send("request need to include action")
 
                 let action = req.body["Action"]
 
-                if(!this.nameToAction[action])
+                if (!this.nameToAction[action])
                     return res.send("action doesnt exist")
 
-                else{
-                    return this.nameToAction[action](req,res)
+                else {
+                    return this.nameToAction[action](req, res)
                 }
 
             })
 
-        
+
         this.router.route('/')
             .get((req, res) => {
                 axios.get(`${config.DBIp}/posts`, req)
                     .then((dbRes) => {
-                        
+
                         dbRes.data.forEach(post => {
 
                             if (!post["PeopleLiked"])
                                 post['isLiked'] = false
-                            else if (post["PeopleLiked"].includes(req.ip)) 
+                            else if (post["PeopleLiked"].includes(req.ip))
                                 post['isLiked'] = true
                             else
                                 post['isLiked'] = false
 
-                            });
+                        });
 
                         res.send({ "items": dbRes.data })
 
@@ -68,8 +67,7 @@ class PostsRouter {
                     })
             })
 
-            this.router.use(verifyToken)
-            .post(this.multerUpload.single('postImage'), (req, res) => {
+            .post(this.multerUpload.single('postImage'), verifyToken, (req, res) => {
 
                 const form = this._reqToFormData(req)
 
