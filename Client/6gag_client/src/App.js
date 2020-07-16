@@ -3,8 +3,8 @@ import React from 'react';
 import './App.css';
 import HomePage from './HomePage';
 import TopBar from './TopBar'
-import Login from './LoginPage'
-import SignUpPage from './SignUpPage'
+import Login from './Login'
+import SignUpPage from './SignUp'
 import { isAuthenticated } from './utils/Login'
 import LoginContainer from './LoginContainer'
 

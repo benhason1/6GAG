@@ -17,7 +17,7 @@ export function isAuthenticated() {
 }
 
 
-export function SignUp(data){
+export function signUp(data){
     return axios.post(`${Config.serverUsersRoute}`,{username:data.username,password:data.password})
     .then(response => {
         localStorage.setItem('x-access-token', response.data.token);
