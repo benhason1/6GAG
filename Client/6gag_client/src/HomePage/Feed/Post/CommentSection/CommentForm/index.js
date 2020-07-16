@@ -18,7 +18,7 @@ export default class CommentForm extends Component {
         const { id } = this.props
         const { currentComment } = this.state
 
-        axios.put(`${Config.serverPostsRoute}/${id}`, { "Action": "comment", "payload": { "content": currentComment } })
+        axios.put(`${Config.serverPostsRoute}/${id}`, { "Action": "comment", "payload": { "content": currentComment } },{ "headers": { "token": localStorage.getItem("x-access-token") } })
             .then(() => console.log("updated comment"))
             .catch((err) => console.log(err))
 

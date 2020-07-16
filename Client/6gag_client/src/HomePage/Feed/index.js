@@ -4,15 +4,21 @@ import './feed.css'
 
 function Feed(props) {
     const { items } = props
-    return (
-        <div className="feed">
-            {items.map(item => {
+    if (!items) {
+        return <h3 id="no-posts">no Posts</h3>
+    }
+    else {
+        return (
+            <div className="feed">
+                {items.map(item => {
 
-                return <Post title={item.title} postImage={item.postImage} id={item.id} altText={item.altText} likes={item.likes} comments={item.comments} isLiked={item.isLiked}></Post>
-            })
-            }
-        </div>
-    )
+                    return <Post title={item.title} postImage={item.postImage} id={item.id} altText={item.altText} likes={item.likes} comments={item.comments} isLiked={item.isLiked}></Post>
+                })
+                }
+            </div>
+        )
+    }
 }
+
 
 export default Feed;

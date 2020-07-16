@@ -1,6 +1,6 @@
 const
 	config = require('../Configuration')
-	jwt = require('jsonwebtoken'),
+jwt = require('jsonwebtoken'),
 	JWT_SECRET = config.jwtSecret
 axios = require('axios')
 // function for creating tokens
@@ -27,9 +27,16 @@ function verifyToken(req, res, next) {
 		}
 		// otherwise, search for user by id that was embedded in token
 
-		axios.get(`${config.DBIp}/users/${decodedData._id}`)
-			.then((dbRes) => req.user = dbRes.data.user)
-		next()
+		axios.get(`${config.DBIp}/users/${decodedData.id}`)
+			.then((dbRes) => {
+				req.user = dbRes.data.user
+				next()
+			}
+			)
+			.catch((err) => {
+				res.status(500)
+				res.send(err)
+			})
 	})
 }
 
