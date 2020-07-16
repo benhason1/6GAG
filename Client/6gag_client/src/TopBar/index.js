@@ -1,9 +1,10 @@
 import { Component } from 'react'
 import React from 'react'
-import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core'
+import { AppBar, Toolbar, IconButton, Button, Tab, Tabs } from '@material-ui/core'
 import './TopBar.css'
 import UploadPostForm from '../UploadPostForm'
 import Popup from '../utils/Popup'
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -19,22 +20,33 @@ export default class TopBar extends Component {
         })
     }
 
-    render() {
-        return <div className="top-bar">
+    handleChane() {
+        console.log("hi")
+    }
 
+    render() {
+        return <Router>
             <AppBar style={{ background: "#fff" }}>
 
                 <Toolbar >
                     <div id="six-gag-logo">
                         6gag
-                    </div>
+                        </div>
+
+                    <Tabs style={{ color: "black" }}>
+                        <Tab label="Home" component={Link} to="/" onChange={this.handleChane} />
+                        <Tab label="login" component={Link} to="/login" onChange={this.handleChane} />
+                    </Tabs>
+
                     <div id="upload-button">
                         <Button color="inherit" type="submit" onClick={this.onUploadButtonSubmit.bind(this)}>+ Upload</Button>
                         {this.state.showUploadPopup && <Popup closePopup={this.onUploadButtonSubmit.bind(this)} text={<UploadPostForm></UploadPostForm>}></Popup>}
                     </div>
                 </Toolbar>
             </AppBar>
-        </div>
+
+            <Route exact path="/" component={this.props.home}></Route>
+        </Router>
     }
 }
 
